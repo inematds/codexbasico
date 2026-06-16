@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Trilha 2 — Terminal e Interface | INEMA.CLUB</title>
+  <meta name="inema-course" content="codexbasico"/>
+  <script>
+    try {
+      var p = JSON.parse(localStorage.getItem('inema.prefs') || '{}');
+      if (p.dark === false) document.documentElement.classList.remove('dark');
+      else document.documentElement.classList.add('dark');
+    } catch(e) { document.documentElement.classList.add('dark'); }
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config={darkMode:'class',theme:{extend:{colors:{'dark-900':'#0f172a','dark-800':'#1e293b','dark-700':'#334155','dark-600':'#475569',primary:'#FACC15'}}}}</script>
+  <style>
+    html:not(.dark) body{background-color:#f8fafc}
+    html:not(.dark) .bg-dark-900{background-color:#ffffff}
+    html:not(.dark) .bg-dark-800{background-color:#f9fafb}
+    html:not(.dark) .bg-dark-700{background-color:#f3f4f6}
+    html:not(.dark) .text-neutral-100{color:#111827}
+    html:not(.dark) .text-neutral-300{color:#4b5563}
+    html:not(.dark) .text-neutral-400{color:#6b7280}
+    html:not(.dark) .text-neutral-500{color:#9ca3af}
+    html:not(.dark) .border-dark-600{border-color:#d1d5db}
+    html:not(.dark) .border-dark-700{border-color:#e5e7eb}
+    html:not(.dark) .text-primary{color:#a16207}
+    html:not(.dark) .text-sky-400{color:#0369a1}
+    html:not(.dark) nav{background-color:rgba(255,255,255,0.95)!important;border-bottom-color:#e5e7eb!important}
+    html:not(.dark) [class*="bg-gradient-to"]{background-image:none!important}
+    html:not(.dark) .text-blue-400{color:#2563eb}
+    html:not(.dark) .bg-blue-500\/20{background-color:rgba(37,99,235,0.12)}
+    html:not(.dark) .border-blue-500\/30{border-color:rgba(37,99,235,0.25)}
+    html:not(.dark) .text-emerald-400{color:#059669}
+    html:not(.dark) .text-purple-400{color:#7c3aed}
+    html:not(.dark) .text-amber-400{color:#92400e}
+    html:not(.dark) .text-teal-400{color:#0d9488}
+    html:not(.dark) .text-rose-400{color:#9f1239}
+    html:not(.dark) svg[role="img"]{filter:saturate(0.82) brightness(0.96)}
+    .dark .border-dark-600{border-color:#374151}
+    .dark .divide-dark-600>:not([hidden])~:not([hidden]){border-color:#374151}
+    .topic-explanation{display:none}
+    .topic-explanation.open{display:block}
+    [id]{scroll-margin-top:72px}
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+<nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between gap-4">
+    <div class="flex items-center gap-3 min-w-0">
+      <a href="../../" class="text-primary font-black text-xl tracking-tight">INEMA</a>
+      <span class="text-dark-600 hidden sm:inline">|</span>
+      <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium hidden sm:inline">INEMA.CLUB</a>
+    </div>
+    <div class="flex items-center gap-1.5 flex-wrap">
+      <a href="../trilha1/" class="text-xs px-2.5 py-1.5 rounded-lg bg-dark-700 text-neutral-300 hover:text-emerald-400 transition">T1 Básico</a>
+      <a href="../trilha2/" class="text-xs px-2.5 py-1.5 rounded-lg bg-blue-500/20 text-blue-400 border border-blue-500/30 font-medium">T2 Terminal</a>
+      <a href="../trilha3/" class="text-xs px-2.5 py-1.5 rounded-lg bg-dark-700 text-neutral-300 hover:text-purple-400 transition hidden sm:inline">T3 Builder</a>
+      <a href="../trilha4/" class="text-xs px-2.5 py-1.5 rounded-lg bg-dark-700 text-neutral-300 hover:text-amber-400 transition hidden md:inline">T4 BMAD</a>
+      <a href="../trilha5/" class="text-xs px-2.5 py-1.5 rounded-lg bg-dark-700 text-neutral-300 hover:text-teal-400 transition hidden md:inline">T5 Equipe</a>
+      <a href="../trilha6/" class="text-xs px-2.5 py-1.5 rounded-lg bg-dark-700 text-neutral-300 hover:text-rose-400 transition hidden lg:inline">T6 WhatsApp</a>
+      <button onclick="toggleTheme()" aria-label="Alternar tema" class="w-8 h-8 rounded-lg bg-dark-700 hover:bg-dark-600 flex items-center justify-center transition text-neutral-400">
+        <svg id="icon-sun" class="w-4 h-4 hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"/></svg>
+        <svg id="icon-moon" class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<header class="bg-gradient-to-br from-blue-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <span class="inline-block px-3 py-1 bg-blue-500/20 text-blue-400 text-xs font-semibold rounded-full mb-4 border border-blue-500/30">TRILHA 2</span>
+    <h1 class="text-3xl sm:text-4xl font-black mb-3">⌨️ Terminal e Interface Gráfica</h1>
+    <p class="text-neutral-300 text-lg mb-6 max-w-2xl">Instale o Codex do zero, domine o terminal e use a interface gráfica do App para Windows.</p>
+    <div class="flex flex-wrap gap-4 text-sm">
+      <span class="flex items-center gap-1.5 text-neutral-400"><span class="w-2 h-2 rounded-full bg-blue-400"></span>6 módulos</span>
+      <span class="flex items-center gap-1.5 text-neutral-400"><span class="w-2 h-2 rounded-full bg-blue-400"></span>~45 minutos</span>
+      <span class="flex items-center gap-1.5 text-neutral-400"><span class="w-2 h-2 rounded-full bg-blue-400"></span>Windows + Linux + Mac</span>
+    </div>
+  </div>
+</header>
+
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+
+  <!-- MAPA DA TRILHA -->
+  <section id="mapa-da-trilha" class="mb-12">
+    <h2 class="text-2xl font-bold mb-6">Mapa da trilha</h2>
+    <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+      <a href="#modulo-2-1" class="bg-dark-800 rounded-xl border border-dark-600 hover:border-blue-500/40 p-4 transition block">
+        <div class="flex items-center justify-between mb-2"><span class="text-blue-400 text-sm font-bold">2.1</span><span class="text-xs text-neutral-500">~8 min</span></div>
+        <div class="font-semibold text-sm mb-1">🖥️ Pré-requisitos</div>
+        <p class="text-xs text-neutral-400">Node.js, Git e ambiente</p>
+      </a>
+      <a href="#modulo-2-2" class="bg-dark-800 rounded-xl border border-dark-600 hover:border-blue-500/40 p-4 transition block">
+        <div class="flex items-center justify-between mb-2"><span class="text-blue-400 text-sm font-bold">2.2</span><span class="text-xs text-neutral-500">~8 min</span></div>
+        <div class="font-semibold text-sm mb-1">📦 Instalação Codex</div>
+        <p class="text-xs text-neutral-400">npm install, verificação</p>
+      </a>
+      <a href="#modulo-2-3" class="bg-dark-800 rounded-xl border border-dark-600 hover:border-blue-500/40 p-4 transition block">
+        <div class="flex items-center justify-between mb-2"><span class="text-blue-400 text-sm font-bold">2.3</span><span class="text-xs text-neutral-500">~7 min</span></div>
+        <div class="font-semibold text-sm mb-1">🔑 Login e Auth</div>
+        <p class="text-xs text-neutral-400">Device auth, tokens</p>
+      </a>
+      <a href="#modulo-2-4" class="bg-dark-800 rounded-xl border border-dark-600 hover:border-blue-500/40 p-4 transition block">
+        <div class="flex items-center justify-between mb-2"><span class="text-blue-400 text-sm font-bold">2.4</span><span class="text-xs text-neutral-500">~7 min</span></div>
+        <div class="font-semibold text-sm mb-1">⌨️ Terminal Essencial</div>
+        <p class="text-xs text-neutral-400">Comandos, flags, navegação</p>
+      </a>
+      <a href="#modulo-2-5" class="bg-dark-800 rounded-xl border border-dark-600 hover:border-blue-500/40 p-4 transition block">
+        <div class="flex items-center justify-between mb-2"><span class="text-blue-400 text-sm font-bold">2.5</span><span class="text-xs text-neutral-500">~8 min</span></div>
+        <div class="font-semibold text-sm mb-1">🪟 Interface Gráfica</div>
+        <p class="text-xs text-neutral-400">Codex App para Windows</p>
+      </a>
+      <a href="#modulo-2-6" class="bg-dark-800 rounded-xl border border-dark-600 hover:border-blue-500/40 p-4 transition block">
+        <div class="flex items-center justify-between mb-2"><span class="text-blue-400 text-sm font-bold">2.6</span><span class="text-xs text-neutral-500">~7 min</span></div>
+        <div class="font-semibold text-sm mb-1">🐳 Docker e Avançado</div>
+        <p class="text-xs text-neutral-400">Containers, config global</p>
+      </a>
+    </div>
+  </section>
+
+  <h2 class="text-2xl font-bold mb-6">Conteúdo detalhado</h2>
+
+  <!-- Módulo 2.1 -->
+  <div class="mb-6 rounded-2xl border border-dark-600 bg-dark-800 overflow-hidden" id="modulo-2-1">
+    <button onclick="toggleTopic(this)" aria-expanded="false" aria-controls="exp-2-1"
+            class="w-full flex justify-start items-center gap-4 p-5 hover:bg-dark-700 transition text-left">
+      <span class="text-blue-400 text-xs font-bold w-6 flex-shrink-0">2.1</span>
+      <span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 border border-blue-500/30 flex items-center justify-center text-sm font-bold flex-shrink-0">1</span>
+      <div class="flex-1 min-w-0">
+        <h2 class="text-xl font-bold">Pré-requisitos do Ambiente</h2>
+        <p class="text-sm text-neutral-400 mt-0.5">Node.js v18+ · Git · npm · verificação do sistema</p>
+      </div>
+      <span class="text-xs text-neutral-500 hidden sm:block">~8 min</span>
+      <svg class="w-5 h-5 text-neutral-400 flex-shrink-0 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+    </button>
+    <div id="exp-2-1" class="topic-explanation px-5 pb-6">
+      <div class="border-t border-dark-600 pt-5 space-y-5">
+        <div><h3 class="text-base font-semibold text-blue-400 mb-2">🟢 O que é</h3><p class="text-neutral-300 text-sm leading-relaxed">Antes do Codex você precisa de Node.js v18 ou superior (que inclui npm) e Git. Versões antigas do Node causam erros silenciosos durante a instalação do Codex.</p></div>
+        <div><h3 class="text-base font-semibold text-blue-400 mb-2">💡 Por que aprender</h3><p class="text-neutral-300 text-sm leading-relaxed">O npm é o gerenciador de pacotes que instala o Codex globalmente. Sem Node.js v18+, mesmo o comando de instalação falha com mensagens confusas.</p></div>
+        <div><h3 class="text-base font-semibold text-blue-400 mb-3">🔑 Instalação por sistema</h3>
+          <div class="space-y-3">
+            <div class="bg-dark-700/40 border border-dark-600 rounded-xl p-4">
+              <div class="text-xs font-bold text-neutral-400 mb-2 uppercase tracking-wider">🟩 Windows</div>
+              <pre class="bg-dark-900 rounded-lg p-3 text-xs text-blue-300 overflow-x-auto font-mono"># Instalar Git
+winget install --id Git.Git -e --source winget
+
+# Instalar Node.js (baixe de nodejs.org → LTS)
+# Verificar depois:
+node -v    # deve ser v18+
+npm -v     # deve ser 9+</pre>
+            </div>
+            <div class="bg-dark-700/40 border border-dark-600 rounded-xl p-4">
+              <div class="text-xs font-bold text-neutral-400 mb-2 uppercase tracking-wider">🟦 Linux / Ubuntu</div>
+              <pre class="bg-dark-900 rounded-lg p-3 text-xs text-blue-300 overflow-x-auto font-mono">curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+sudo apt-get install -y nodejs git
+node -v && npm -v</pre>
+            </div>
+            <div class="bg-dark-700/40 border border-dark-600 rounded-xl p-4">
+              <div class="text-xs font-bold text-neutral-400 mb-2 uppercase tracking-wider">🍎 macOS</div>
+              <pre class="bg-dark-900 rounded-lg p-3 text-xs text-blue-300 overflow-x-auto font-mono">brew install node git
+node -v && npm -v</pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Módulo 2.2 -->
+  <div class="mb-6 rounded-2xl border border-dark-600 bg-dark-800 overflow-hidden" id="modulo-2-2">
+    <button onclick="toggleTopic(this)" aria-expanded="false" aria-controls="exp-2-2"
+            class="w-full flex justify-start items-center gap-4 p-5 hover:bg-dark-700 transition text-left">
+      <span class="text-blue-400 text-xs font-bold w-6 flex-shrink-0">2.2</span>
+      <span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 border border-blue-500/30 flex items-center justify-center text-sm font-bold flex-shrink-0">2</span>
+      <div class="flex-1 min-w-0">
+        <h2 class="text-xl font-bold">Instalação do Codex CLI</h2>
+        <p class="text-sm text-neutral-400 mt-0.5">npm install global · verificar versão · atualizar</p>
+      </div>
+      <span class="text-xs text-neutral-500 hidden sm:block">~8 min</span>
+      <svg class="w-5 h-5 text-neutral-400 flex-shrink-0 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+    </button>
+    <div id="exp-2-2" class="topic-explanation px-5 pb-6">
+      <div class="border-t border-dark-600 pt-5 space-y-5">
+        <div><h3 class="text-base font-semibold text-blue-400 mb-2">🟢 O que é</h3><p class="text-neutral-300 text-sm leading-relaxed">O Codex CLI é distribuído como pacote npm: <code class="bg-dark-700 px-1.5 py-0.5 rounded text-amber-400 text-xs font-mono">@openai/codex</code>. A flag <code class="bg-dark-700 px-1.5 py-0.5 rounded text-amber-400 text-xs font-mono">-g</code> instala globalmente — disponível em qualquer diretório.</p></div>
+        <div><h3 class="text-base font-semibold text-blue-400 mb-2">💡 Por que aprender</h3><p class="text-neutral-300 text-sm leading-relaxed">Instalação global vs local faz diferença: global permite chamar <code>codex</code> de qualquer pasta. Local só funciona dentro do projeto com npx.</p></div>
+        <div><h3 class="text-base font-semibold text-blue-400 mb-3">🔑 Comandos de instalação</h3>
+          <div class="space-y-3">
+            <div class="bg-dark-700/40 border border-dark-600 rounded-xl p-4">
+              <div class="text-xs font-bold text-neutral-400 mb-2 uppercase tracking-wider">Instalar</div>
+              <pre class="bg-dark-900 rounded-lg p-3 text-xs text-blue-300 overflow-x-auto font-mono">npm install -g @openai/codex
+# Verificar instalação:
+codex --version</pre>
+            </div>
+            <div class="bg-dark-700/40 border border-dark-600 rounded-xl p-4">
+              <div class="text-xs font-bold text-neutral-400 mb-2 uppercase tracking-wider">Atualizar</div>
+              <pre class="bg-dark-900 rounded-lg p-3 text-xs text-blue-300 overflow-x-auto font-mono">npm update -g @openai/codex</pre>
+            </div>
+            <div class="bg-blue-500/5 border border-blue-500/20 rounded-xl p-4">
+              <div class="text-xs font-bold text-blue-400 mb-2">💡 Problema com permissões (Linux/Mac)</div>
+              <pre class="bg-dark-900 rounded-lg p-3 text-xs text-neutral-300 overflow-x-auto font-mono"># Se erro EACCES, configure npm prefix:
+mkdir ~/.npm-global
+npm config set prefix '~/.npm-global'
+echo 'export PATH=~/.npm-global/bin:$PATH' >> ~/.bashrc
+source ~/.bashrc</pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Módulo 2.3 -->
+  <div class="mb-6 rounded-2xl border border-dark-600 bg-dark-800 overflow-hidden" id="modulo-2-3">
+    <button onclick="toggleTopic(this)" aria-expanded="false" aria-controls="exp-2-3"
+            class="w-full flex justify-start items-center gap-4 p-5 hover:bg-dark-700 transition text-left">
+      <span class="text-blue-400 text-xs font-bold w-6 flex-shrink-0">2.3</span>
+      <span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 border border-blue-500/30 flex items-center justify-center text-sm font-bold flex-shrink-0">3</span>
+      <div class="flex-1 min-w-0">
+        <h2 class="text-xl font-bold">Login e Autenticação</h2>
+        <p class="text-sm text-neutral-400 mt-0.5">device auth · OAuth · segurança · Docker</p>
+      </div>
+      <span class="text-xs text-neutral-500 hidden sm:block">~7 min</span>
+      <svg class="w-5 h-5 text-neutral-400 flex-shrink-0 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+    </button>
+    <div id="exp-2-3" class="topic-explanation px-5 pb-6">
+      <div class="border-t border-dark-600 pt-5 space-y-5">
+        <div><h3 class="text-base font-semibold text-blue-400 mb-2">🟢 O que é</h3><p class="text-neutral-300 text-sm leading-relaxed">O login usa <em>device auth</em>: o terminal exibe um código + link. Você abre o link no browser, digita o código e está autenticado. Sem expor API keys no terminal.</p></div>
+        <div><h3 class="text-base font-semibold text-blue-400 mb-2">💡 Por que aprender</h3><p class="text-neutral-300 text-sm leading-relaxed">Device auth é seguro mesmo em ambientes compartilhados. O código expira em 15 minutos — abra o link imediatamente.</p></div>
+        <div><h3 class="text-base font-semibold text-blue-400 mb-3">🔑 Passo a passo</h3>
+          <div class="space-y-3">
+            <div class="bg-blue-500/5 border border-blue-500/20 rounded-xl p-4">
+              <pre class="bg-dark-900 rounded-lg p-3 text-xs text-blue-300 overflow-x-auto font-mono">codex login --device-auth
+
+# Saída esperada:
+# Abra: https://auth.openai.com/codex/device
+# Código: XXXX-XXXX (expira em 15 min)
+# ⚠️ NUNCA compartilhe este código
+# ✓ Successfully logged in</pre>
+            </div>
+            <div class="bg-dark-700/40 border border-dark-600 rounded-xl p-4">
+              <div class="text-xs font-bold text-neutral-400 mb-2 uppercase tracking-wider">Alternativa: API Key</div>
+              <pre class="bg-dark-900 rounded-lg p-3 text-xs text-blue-300 overflow-x-auto font-mono">export OPENAI_API_KEY="sk-..."
+codex auth login</pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Módulo 2.4 -->
+  <div class="mb-6 rounded-2xl border border-dark-600 bg-dark-800 overflow-hidden" id="modulo-2-4">
+    <button onclick="toggleTopic(this)" aria-expanded="false" aria-controls="exp-2-4"
+            class="w-full flex justify-start items-center gap-4 p-5 hover:bg-dark-700 transition text-left">
+      <span class="text-blue-400 text-xs font-bold w-6 flex-shrink-0">2.4</span>
+      <span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 border border-blue-500/30 flex items-center justify-center text-sm font-bold flex-shrink-0">4</span>
+      <div class="flex-1 min-w-0">
+        <h2 class="text-xl font-bold">Terminal — Comandos Essenciais</h2>
+        <p class="text-sm text-neutral-400 mt-0.5">modo interativo · flags · / comandos · @ referências</p>
+      </div>
+      <span class="text-xs text-neutral-500 hidden sm:block">~7 min</span>
+      <svg class="w-5 h-5 text-neutral-400 flex-shrink-0 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+    </button>
+    <div id="exp-2-4" class="topic-explanation px-5 pb-6">
+      <div class="border-t border-dark-600 pt-5 space-y-5">
+        <div><h3 class="text-base font-semibold text-blue-400 mb-2">🟢 O que é</h3><p class="text-neutral-300 text-sm leading-relaxed">Após instalar e fazer login, o Codex funciona no terminal com dois modos: interativo (<code class="bg-dark-700 px-1.5 py-0.5 rounded text-amber-400 text-xs font-mono">codex</code>) e direto (<code class="bg-dark-700 px-1.5 py-0.5 rounded text-amber-400 text-xs font-mono">codex "prompt"</code>).</p></div>
+        <div><h3 class="text-base font-semibold text-blue-400 mb-2">💡 Por que aprender</h3><p class="text-neutral-300 text-sm leading-relaxed">Modo interativo é ideal para tarefas longas e iterativas. Modo direto é ótimo para scripts e automações em CI/CD.</p></div>
+        <div><h3 class="text-base font-semibold text-blue-400 mb-3">🔑 Referência rápida</h3>
+          <div class="space-y-3">
+            <pre class="bg-dark-900 rounded-lg p-3 text-xs text-blue-300 overflow-x-auto font-mono">codex                      # modo interativo
+codex "crie testes"        # prompt direto
+codex chat                 # modo conversa
+codex --full-auto "..."    # sem confirmação
+codex --model gpt-5 "..."  # modelo específico
+codex generate --prompt "..."|# gerar código</pre>
+            <div class="bg-dark-700/40 border border-dark-600 rounded-xl p-4">
+              <div class="text-xs font-bold text-neutral-400 mb-2 uppercase tracking-wider">Dentro do modo interativo</div>
+              <div class="grid sm:grid-cols-2 gap-2 text-xs">
+                <div class="flex gap-2"><code class="text-blue-400 font-mono">/plan mode</code><span class="text-neutral-400">— planejar antes</span></div>
+                <div class="flex gap-2"><code class="text-blue-400 font-mono">/model</code><span class="text-neutral-400">— trocar modelo</span></div>
+                <div class="flex gap-2"><code class="text-blue-400 font-mono">/reasoning</code><span class="text-neutral-400">— ajustar raciocínio</span></div>
+                <div class="flex gap-2"><code class="text-blue-400 font-mono">/browser use</code><span class="text-neutral-400">— ativar browser</span></div>
+                <div class="flex gap-2"><code class="text-blue-400 font-mono">@arquivo.ts</code><span class="text-neutral-400">— referenciar arquivo</span></div>
+                <div class="flex gap-2"><code class="text-blue-400 font-mono">$skill-name</code><span class="text-neutral-400">— invocar skill</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Módulo 2.5 -->
+  <div class="mb-6 rounded-2xl border border-dark-600 bg-dark-800 overflow-hidden" id="modulo-2-5">
+    <button onclick="toggleTopic(this)" aria-expanded="false" aria-controls="exp-2-5"
+            class="w-full flex justify-start items-center gap-4 p-5 hover:bg-dark-700 transition text-left">
+      <span class="text-blue-400 text-xs font-bold w-6 flex-shrink-0">2.5</span>
+      <span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 border border-blue-500/30 flex items-center justify-center text-sm font-bold flex-shrink-0">5</span>
+      <div class="flex-1 min-w-0">
+        <h2 class="text-xl font-bold">Interface Gráfica — Codex App (Windows)</h2>
+        <p class="text-sm text-neutral-400 mt-0.5">skills · plugins · threads · browser · automações</p>
+      </div>
+      <span class="text-xs text-neutral-500 hidden sm:block">~8 min</span>
+      <svg class="w-5 h-5 text-neutral-400 flex-shrink-0 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+    </button>
+    <div id="exp-2-5" class="topic-explanation px-5 pb-6">
+      <div class="border-t border-dark-600 pt-5 space-y-5">
+        <div><h3 class="text-base font-semibold text-blue-400 mb-2">🟢 O que é</h3><p class="text-neutral-300 text-sm leading-relaxed">O Codex App para Windows é a interface gráfica completa: skills com UI, plugins externos, previews inline, múltiplas threads paralelas, aba de Automations e browser integrado.</p></div>
+        <div><h3 class="text-base font-semibold text-blue-400 mb-2">💡 Por que aprender</h3><p class="text-neutral-300 text-sm leading-relaxed">A interface gráfica é superior ao CLI para tarefas que envolvem várias threads simultâneas, automações agendadas e uso de browser para computer use.</p></div>
+        <div><h3 class="text-base font-semibold text-blue-400 mb-3">🔑 Recursos principais</h3>
+          <div class="grid sm:grid-cols-2 gap-3">
+            <div class="bg-dark-700/40 border border-dark-600 rounded-xl p-3"><div class="text-xs font-bold text-blue-400 mb-1">📋 Skills com UI</div><p class="text-xs text-neutral-400">Interface visual para criar e gerenciar skills, sem editar arquivos manualmente</p></div>
+            <div class="bg-dark-700/40 border border-dark-600 rounded-xl p-3"><div class="text-xs font-bold text-blue-400 mb-1">🔗 Plugins externos</div><p class="text-xs text-neutral-400">Conectar APIs externas, bancos de dados e serviços via MCP</p></div>
+            <div class="bg-dark-700/40 border border-dark-600 rounded-xl p-3"><div class="text-xs font-bold text-blue-400 mb-1">⚡ Threads paralelas</div><p class="text-xs text-neutral-400">Várias conversas/tarefas simultâneas com alternância fácil</p></div>
+            <div class="bg-dark-700/40 border border-dark-600 rounded-xl p-3"><div class="text-xs font-bold text-blue-400 mb-1">🔄 Automations</div><p class="text-xs text-neutral-400">Aba dedicada para agendar rotinas recorrentes</p></div>
+            <div class="bg-dark-700/40 border border-dark-600 rounded-xl p-3"><div class="text-xs font-bold text-blue-400 mb-1">🌐 Browser integrado</div><p class="text-xs text-neutral-400">Computer use: Codex navega e interage com sites</p></div>
+            <div class="bg-dark-700/40 border border-dark-600 rounded-xl p-3"><div class="text-xs font-bold text-blue-400 mb-1">👁️ Previews inline</div><p class="text-xs text-neutral-400">Ver resultados de código (imagens, HTMLs) sem sair do app</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Módulo 2.6 -->
+  <div class="mb-6 rounded-2xl border border-dark-600 bg-dark-800 overflow-hidden" id="modulo-2-6">
+    <button onclick="toggleTopic(this)" aria-expanded="false" aria-controls="exp-2-6"
+            class="w-full flex justify-start items-center gap-4 p-5 hover:bg-dark-700 transition text-left">
+      <span class="text-blue-400 text-xs font-bold w-6 flex-shrink-0">2.6</span>
+      <span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 border border-blue-500/30 flex items-center justify-center text-sm font-bold flex-shrink-0">6</span>
+      <div class="flex-1 min-w-0">
+        <h2 class="text-xl font-bold">Docker e Configuração Avançada</h2>
+        <p class="text-sm text-neutral-400 mt-0.5">containers · config.toml global · variáveis de ambiente</p>
+      </div>
+      <span class="text-xs text-neutral-500 hidden sm:block">~7 min</span>
+      <svg class="w-5 h-5 text-neutral-400 flex-shrink-0 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+    </button>
+    <div id="exp-2-6" class="topic-explanation px-5 pb-6">
+      <div class="border-t border-dark-600 pt-5 space-y-5">
+        <div><h3 class="text-base font-semibold text-blue-400 mb-2">🟢 O que é</h3><p class="text-neutral-300 text-sm leading-relaxed">O Codex funciona em Docker via device auth. O arquivo <code class="bg-dark-700 px-1.5 py-0.5 rounded text-amber-400 text-xs font-mono">~/.codex/config.toml</code> persiste configurações globais como approval policy e sandbox mode.</p></div>
+        <div><h3 class="text-base font-semibold text-blue-400 mb-2">💡 Por que aprender</h3><p class="text-neutral-300 text-sm leading-relaxed">Containers são ideais para usar <code>--dangerously-bypass-approvals</code> com segurança — o sistema host fica protegido. Config.toml evita repetir flags a cada sessão.</p></div>
+        <div><h3 class="text-base font-semibold text-blue-400 mb-3">🔑 Config.toml e Docker</h3>
+          <div class="space-y-3">
+            <div class="bg-dark-700/40 border border-dark-600 rounded-xl p-4">
+              <div class="text-xs font-bold text-neutral-400 mb-2 uppercase tracking-wider">~/.codex/config.toml</div>
+              <pre class="bg-dark-900 rounded-lg p-3 text-xs text-blue-300 overflow-x-auto font-mono"># Configuração equilibrada (recomendada)
+approval_policy = "never"
+sandbox_mode = "workspace-write"
+model = "gpt-5"</pre>
+            </div>
+            <div class="bg-dark-700/40 border border-dark-600 rounded-xl p-4">
+              <div class="text-xs font-bold text-neutral-400 mb-2 uppercase tracking-wider">Usando em Docker</div>
+              <pre class="bg-dark-900 rounded-lg p-3 text-xs text-blue-300 overflow-x-auto font-mono">docker run --rm -it \
+  -v "$PWD:/app" -w /app \
+  node:20 bash
+# dentro do container:
+npm install -g @openai/codex
+codex login --device-auth</pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="flex items-center justify-between mt-10 pt-8 border-t border-dark-700">
+    <a href="../trilha1/" class="text-sm text-neutral-400 hover:text-neutral-200 transition flex items-center gap-2">← T1 Básico</a>
+    <a href="../trilha3/" class="text-sm text-purple-400 hover:text-purple-300 transition flex items-center gap-2">Próxima: T3 Agent Builder →</a>
+  </div>
+</div>
+
+<footer class="border-t border-dark-700 py-10 px-4 mt-8">
+  <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+    <div class="flex items-center gap-3"><span class="text-primary font-black text-lg">INEMA</span><span class="text-dark-600">|</span><a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm">INEMA.CLUB</a></div>
+    <p class="text-sm text-neutral-500">Canal <a href="https://t.me/c/3053650449/2" target="_blank" class="text-amber-400 hover:text-amber-300">INEMA.Codex</a> · maio 2026</p>
+    <p class="text-xs text-neutral-600"><a href="https://github.com/inematds/codexbasico" target="_blank" class="hover:text-neutral-400">inematds/codexbasico</a></p>
+  </div>
+</footer>
+
+<script>
+  function toggleTopic(btn) {
+    const id = btn.getAttribute('aria-controls');
+    const panel = document.getElementById(id);
+    const svg = btn.querySelector('svg:last-child');
+    const isOpen = panel.classList.contains('open');
+    panel.classList.toggle('open', !isOpen);
+    btn.setAttribute('aria-expanded', String(!isOpen));
+    if (svg) svg.style.transform = isOpen ? '' : 'rotate(180deg)';
+  }
+  function toggleTheme() {
+    const html = document.documentElement;
+    const isDark = html.classList.toggle('dark');
+    document.getElementById('icon-sun').classList.toggle('hidden', isDark);
+    document.getElementById('icon-moon').classList.toggle('hidden', !isDark);
+    try { localStorage.setItem('inema.prefs', JSON.stringify({dark: isDark})); } catch(e){}
+  }
+  (function() {
+    const isDark = document.documentElement.classList.contains('dark');
+    document.getElementById('icon-sun').classList.toggle('hidden', isDark);
+    document.getElementById('icon-moon').classList.toggle('hidden', !isDark);
+  })();
+</script>
+</body>
+</html>

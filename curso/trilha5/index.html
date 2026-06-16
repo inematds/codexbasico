@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Trilha 5 — Equipe de Agentes | INEMA.CLUB</title>
+  <meta name="inema-course" content="codexbasico"/>
+  <script>
+    try{var p=JSON.parse(localStorage.getItem('inema.prefs')||'{}');if(p.dark===false)document.documentElement.classList.remove('dark');else document.documentElement.classList.add('dark');}catch(e){document.documentElement.classList.add('dark');}
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config={darkMode:'class',theme:{extend:{colors:{'dark-900':'#0f172a','dark-800':'#1e293b','dark-700':'#334155','dark-600':'#475569',primary:'#FACC15'}}}}</script>
+  <style>
+    html:not(.dark) body{background-color:#f8fafc}html:not(.dark) .bg-dark-900{background-color:#ffffff}html:not(.dark) .bg-dark-800{background-color:#f9fafb}html:not(.dark) .bg-dark-700{background-color:#f3f4f6}html:not(.dark) .text-neutral-100{color:#111827}html:not(.dark) .text-neutral-300{color:#4b5563}html:not(.dark) .text-neutral-400{color:#6b7280}html:not(.dark) .text-neutral-500{color:#9ca3af}html:not(.dark) .border-dark-600{border-color:#d1d5db}html:not(.dark) .border-dark-700{border-color:#e5e7eb}html:not(.dark) .text-primary{color:#a16207}html:not(.dark) .text-sky-400{color:#0369a1}html:not(.dark) nav{background-color:rgba(255,255,255,0.95)!important;border-bottom-color:#e5e7eb!important}html:not(.dark) [class*="bg-gradient-to"]{background-image:none!important}
+    html:not(.dark) .text-teal-400{color:#0d9488}html:not(.dark) .bg-teal-500\/20{background-color:rgba(13,148,136,0.1)}html:not(.dark) .border-teal-500\/30{border-color:rgba(13,148,136,0.2)}
+    html:not(.dark) .text-emerald-400{color:#059669}html:not(.dark) .text-blue-400{color:#2563eb}html:not(.dark) .text-purple-400{color:#7c3aed}html:not(.dark) .text-amber-400{color:#92400e}html:not(.dark) .text-rose-400{color:#9f1239}
+    html:not(.dark) svg[role="img"]{filter:saturate(0.82) brightness(0.96)}
+    .dark .border-dark-600{border-color:#374151}.dark .divide-dark-600>:not([hidden])~:not([hidden]){border-color:#374151}
+    .topic-explanation{display:none}.topic-explanation.open{display:block}[id]{scroll-margin-top:72px}
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+<nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between gap-4">
+    <div class="flex items-center gap-3 min-w-0">
+      <a href="../../" class="text-primary font-black text-xl tracking-tight">INEMA</a>
+      <span class="text-dark-600 hidden sm:inline">|</span>
+      <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium hidden sm:inline">INEMA.CLUB</a>
+    </div>
+    <div class="flex items-center gap-1.5 flex-wrap">
+      <a href="../trilha1/" class="text-xs px-2.5 py-1.5 rounded-lg bg-dark-700 text-neutral-300 hover:text-emerald-400 transition">T1 Básico</a>
+      <a href="../trilha2/" class="text-xs px-2.5 py-1.5 rounded-lg bg-dark-700 text-neutral-300 hover:text-blue-400 transition">T2 Terminal</a>
+      <a href="../trilha3/" class="text-xs px-2.5 py-1.5 rounded-lg bg-dark-700 text-neutral-300 hover:text-purple-400 transition hidden sm:inline">T3 Builder</a>
+      <a href="../trilha4/" class="text-xs px-2.5 py-1.5 rounded-lg bg-dark-700 text-neutral-300 hover:text-amber-400 transition hidden md:inline">T4 BMAD</a>
+      <a href="../trilha5/" class="text-xs px-2.5 py-1.5 rounded-lg bg-teal-500/20 text-teal-400 border border-teal-500/30 font-medium hidden sm:inline">T5 Equipe</a>
+      <a href="../trilha6/" class="text-xs px-2.5 py-1.5 rounded-lg bg-dark-700 text-neutral-300 hover:text-rose-400 transition hidden lg:inline">T6 WhatsApp</a>
+      <button onclick="toggleTheme()" aria-label="Alternar tema" class="w-8 h-8 rounded-lg bg-dark-700 hover:bg-dark-600 flex items-center justify-center transition text-neutral-400">
+        <svg id="icon-sun" class="w-4 h-4 hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"/></svg>
+        <svg id="icon-moon" class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<header class="bg-gradient-to-br from-teal-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <span class="inline-block px-3 py-1 bg-teal-500/20 text-teal-400 text-xs font-semibold rounded-full mb-4 border border-teal-500/30">TRILHA 5</span>
+    <h1 class="text-3xl sm:text-4xl font-black mb-3">👥 Equipe de Agentes de Marketing</h1>
+    <p class="text-neutral-300 text-lg mb-6 max-w-2xl">Monte um sistema de 5 agentes autônomos com o Codex: Campaign Manager, Research, Content Strategy, Creative Copy e Data Analysis trabalhando em paralelo.</p>
+    <div class="flex flex-wrap gap-4 text-sm">
+      <span class="flex items-center gap-1.5 text-neutral-400"><span class="w-2 h-2 rounded-full bg-teal-400"></span>6 módulos</span>
+      <span class="flex items-center gap-1.5 text-neutral-400"><span class="w-2 h-2 rounded-full bg-teal-400"></span>~55 minutos</span>
+      <span class="flex items-center gap-1.5 text-neutral-400"><span class="w-2 h-2 rounded-full bg-teal-400"></span>Multi-agentes · Avançado</span>
+    </div>
+  </div>
+</header>
+
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+
+  <section id="mapa-da-trilha" class="mb-12">
+    <h2 class="text-2xl font-bold mb-6">Mapa da trilha</h2>
+    <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+      <a href="#modulo-5-1" class="bg-dark-800 rounded-xl border border-dark-600 hover:border-teal-500/40 p-4 transition block">
+        <div class="flex items-center justify-between mb-2"><span class="text-teal-400 text-sm font-bold">5.1</span><span class="text-xs text-neutral-500">~9 min</span></div>
+        <div class="font-semibold text-sm mb-1">🏗️ Arquitetura</div>
+        <p class="text-xs text-neutral-400">5 agentes, papéis, fluxo</p>
+      </a>
+      <a href="#modulo-5-2" class="bg-dark-800 rounded-xl border border-dark-600 hover:border-teal-500/40 p-4 transition block">
+        <div class="flex items-center justify-between mb-2"><span class="text-teal-400 text-sm font-bold">5.2</span><span class="text-xs text-neutral-500">~8 min</span></div>
+        <div class="font-semibold text-sm mb-1">📁 Estrutura de Arquivos</div>
+        <p class="text-xs text-neutral-400">system.md, brand.md, SKILL.md</p>
+      </a>
+      <a href="#modulo-5-3" class="bg-dark-800 rounded-xl border border-dark-600 hover:border-teal-500/40 p-4 transition block">
+        <div class="flex items-center justify-between mb-2"><span class="text-teal-400 text-sm font-bold">5.3</span><span class="text-xs text-neutral-500">~9 min</span></div>
+        <div class="font-semibold text-sm mb-1">🎯 Campaign Manager</div>
+        <p class="text-xs text-neutral-400">orquestração, task_manifest</p>
+      </a>
+      <a href="#modulo-5-4" class="bg-dark-800 rounded-xl border border-dark-600 hover:border-teal-500/40 p-4 transition block">
+        <div class="flex items-center justify-between mb-2"><span class="text-teal-400 text-sm font-bold">5.4</span><span class="text-xs text-neutral-500">~9 min</span></div>
+        <div class="font-semibold text-sm mb-1">🔬 Research + Strategy</div>
+        <p class="text-xs text-neutral-400">concorrentes, dados, plano</p>
+      </a>
+      <a href="#modulo-5-5" class="bg-dark-800 rounded-xl border border-dark-600 hover:border-teal-500/40 p-4 transition block">
+        <div class="flex items-center justify-between mb-2"><span class="text-teal-400 text-sm font-bold">5.5</span><span class="text-xs text-neutral-500">~9 min</span></div>
+        <div class="font-semibold text-sm mb-1">✍️ Copy + Data</div>
+        <p class="text-xs text-neutral-400">criativo, métricas, relatório</p>
+      </a>
+      <a href="#modulo-5-6" class="bg-dark-800 rounded-xl border border-dark-600 hover:border-teal-500/40 p-4 transition block">
+        <div class="flex items-center justify-between mb-2"><span class="text-teal-400 text-sm font-bold">5.6</span><span class="text-xs text-neutral-500">~11 min</span></div>
+        <div class="font-semibold text-sm mb-1">📋 task_manifest.json</div>
+        <p class="text-xs text-neutral-400">coordenação, paralelo, outputs</p>
+      </a>
+    </div>
+  </section>
+
+  <h2 class="text-2xl font-bold mb-6">Conteúdo detalhado</h2>
+
+  <!-- 5.1 -->
+  <div class="mb-6 rounded-2xl border border-dark-600 bg-dark-800 overflow-hidden" id="modulo-5-1">
+    <button onclick="toggleTopic(this)" aria-expanded="false" aria-controls="exp-5-1" class="w-full flex justify-start items-center gap-4 p-5 hover:bg-dark-700 transition text-left">
+      <span class="text-teal-400 text-xs font-bold w-6 flex-shrink-0">5.1</span>
+      <span class="w-8 h-8 rounded-full bg-teal-500/20 text-teal-400 border border-teal-500/30 flex items-center justify-center text-sm font-bold flex-shrink-0">1</span>
+      <div class="flex-1 min-w-0"><h2 class="text-xl font-bold">Arquitetura de 5 Agentes</h2><p class="text-sm text-neutral-400 mt-0.5">papéis · hierarquia · fluxo de trabalho · Codex como workforce</p></div>
+      <span class="text-xs text-neutral-500 hidden sm:block">~9 min</span>
+      <svg class="w-5 h-5 text-neutral-400 flex-shrink-0 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+    </button>
+    <div id="exp-5-1" class="topic-explanation px-5 pb-6">
+      <div class="border-t border-dark-600 pt-5 space-y-5">
+        <div><h3 class="text-base font-semibold text-teal-400 mb-2">🟢 O que é</h3><p class="text-neutral-300 text-sm leading-relaxed">O sistema <strong>AgenteMktCX</strong> usa o Codex como uma "equipe de trabalho autônoma". 5 agentes especializados operam em paralelo, cada um com sua skill, pasta de output e regras de coordenação.</p></div>
+        <div><h3 class="text-base font-semibold text-teal-400 mb-2">💡 Por que aprender</h3><p class="text-neutral-300 text-sm leading-relaxed">Uma campanha de marketing completa (pesquisa + estratégia + criativo + análise) pode ser produzida pelo Codex em minutos, com outputs organizados em pastas — sem ferramentas externas ou freelancers.</p></div>
+        <div><h3 class="text-base font-semibold text-teal-400 mb-3">🔑 Os 5 agentes</h3>
+          <div class="overflow-x-auto rounded-xl border border-dark-600"><table class="w-full text-xs"><thead class="bg-dark-700"><tr><th class="text-left px-4 py-2 text-neutral-300 font-semibold">Agente</th><th class="text-left px-4 py-2 text-neutral-300 font-semibold">Papel</th><th class="text-left px-4 py-2 text-neutral-300 font-semibold">Output</th></tr></thead><tbody class="divide-y divide-dark-600">
+            <tr class="hover:bg-dark-700/50"><td class="px-4 py-2 text-teal-400 font-semibold">Campaign Manager</td><td class="px-4 py-2 text-neutral-300">Orquestrador</td><td class="px-4 py-2 text-neutral-400">task_manifest.json, relatório final</td></tr>
+            <tr class="hover:bg-dark-700/50"><td class="px-4 py-2 text-teal-400 font-semibold">Research Agent</td><td class="px-4 py-2 text-neutral-300">Pesquisador</td><td class="px-4 py-2 text-neutral-400">/output/research/</td></tr>
+            <tr class="hover:bg-dark-700/50"><td class="px-4 py-2 text-teal-400 font-semibold">Content Strategy</td><td class="px-4 py-2 text-neutral-300">Estrategista</td><td class="px-4 py-2 text-neutral-400">/output/strategy/</td></tr>
+            <tr class="hover:bg-dark-700/50"><td class="px-4 py-2 text-teal-400 font-semibold">Creative Copy</td><td class="px-4 py-2 text-neutral-300">Redator criativo</td><td class="px-4 py-2 text-neutral-400">/output/copy/</td></tr>
+            <tr class="hover:bg-dark-700/50"><td class="px-4 py-2 text-teal-400 font-semibold">Data Analysis</td><td class="px-4 py-2 text-neutral-300">Analista de dados</td><td class="px-4 py-2 text-neutral-400">/output/data/</td></tr>
+          </tbody></table></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5.2 -->
+  <div class="mb-6 rounded-2xl border border-dark-600 bg-dark-800 overflow-hidden" id="modulo-5-2">
+    <button onclick="toggleTopic(this)" aria-expanded="false" aria-controls="exp-5-2" class="w-full flex justify-start items-center gap-4 p-5 hover:bg-dark-700 transition text-left">
+      <span class="text-teal-400 text-xs font-bold w-6 flex-shrink-0">5.2</span>
+      <span class="w-8 h-8 rounded-full bg-teal-500/20 text-teal-400 border border-teal-500/30 flex items-center justify-center text-sm font-bold flex-shrink-0">2</span>
+      <div class="flex-1 min-w-0"><h2 class="text-xl font-bold">Estrutura de Arquivos do Sistema</h2><p class="text-sm text-neutral-400 mt-0.5">system.md · brand.md · SKILL.md por agente · /output</p></div>
+      <span class="text-xs text-neutral-500 hidden sm:block">~8 min</span>
+      <svg class="w-5 h-5 text-neutral-400 flex-shrink-0 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+    </button>
+    <div id="exp-5-2" class="topic-explanation px-5 pb-6">
+      <div class="border-t border-dark-600 pt-5 space-y-5">
+        <div><h3 class="text-base font-semibold text-teal-400 mb-2">🟢 O que é</h3><p class="text-neutral-300 text-sm leading-relaxed">O sistema organiza tudo em arquivos de contexto compartilhados: <strong>system.md</strong> define as regras de orquestração, <strong>brand.md</strong> define a identidade da marca, e cada agente tem seu <strong>SKILL.md</strong> próprio.</p></div>
+        <div><h3 class="text-base font-semibold text-teal-400 mb-3">🔑 Prompt 1 — Criar system.md</h3>
+          <div class="bg-teal-500/5 border border-teal-500/20 rounded-xl p-4">
+            <div class="text-xs font-bold text-teal-400 mb-2">Crie system.md com este prompt no Codex:</div>
+            <pre class="bg-dark-900 rounded-lg p-3 text-xs text-neutral-300 overflow-x-auto font-mono">Crie um arquivo system.md que defina:
+- Funções de cada agente (Campaign Manager, Research,
+  Content Strategy, Creative Copy, Data Analysis)
+- Estrutura das SKILLs (SKILL.md por agente)
+- Pastas /output por agente
+- Regras de orquestração e handoff
+- Formato do task_manifest.json para coordenação</pre>
+          </div>
+        </div>
+        <div><h3 class="text-base font-semibold text-teal-400 mb-3">🔑 Prompt 2 — Criar brand.md</h3>
+          <div class="bg-teal-500/5 border border-teal-500/20 rounded-xl p-4">
+            <pre class="bg-dark-900 rounded-lg p-3 text-xs text-neutral-300 overflow-x-auto font-mono">Crie brand.md com:
+- nome: [nome da marca]
+- público: [perfil do cliente ideal]
+- tom: [ex: profissional, jovem, técnico]
+- posicionamento: [proposta de valor]
+- temas: [tópicos de conteúdo]
+- palavras-chave: [keywords SEO]
+- canais: [LinkedIn, Instagram, email...]
+- metas: [leads, brand awareness, vendas]</pre>
+          </div>
+        </div>
+        <div class="bg-dark-700/40 border border-dark-600 rounded-xl p-4">
+          <div class="text-xs font-bold text-neutral-400 mb-2">Estrutura de pastas gerada</div>
+          <pre class="text-xs text-neutral-300 font-mono">mkt-system/
+├── system.md
+├── brand.md
+├── agents/
+│   ├── research/SKILL.md
+│   ├── strategy/SKILL.md
+│   ├── copy/SKILL.md
+│   └── data/SKILL.md
+└── output/
+    ├── research/
+    ├── strategy/
+    ├── copy/
+    └── data/</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5.3 -->
+  <div class="mb-6 rounded-2xl border border-dark-600 bg-dark-800 overflow-hidden" id="modulo-5-3">
+    <button onclick="toggleTopic(this)" aria-expanded="false" aria-controls="exp-5-3" class="w-full flex justify-start items-center gap-4 p-5 hover:bg-dark-700 transition text-left">
+      <span class="text-teal-400 text-xs font-bold w-6 flex-shrink-0">5.3</span>
+      <span class="w-8 h-8 rounded-full bg-teal-500/20 text-teal-400 border border-teal-500/30 flex items-center justify-center text-sm font-bold flex-shrink-0">3</span>
+      <div class="flex-1 min-w-0"><h2 class="text-xl font-bold">Campaign Manager — Orquestração</h2><p class="text-sm text-neutral-400 mt-0.5">lê brand.md · gera task_manifest · delega · relatório final</p></div>
+      <span class="text-xs text-neutral-500 hidden sm:block">~9 min</span>
+      <svg class="w-5 h-5 text-neutral-400 flex-shrink-0 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+    </button>
+    <div id="exp-5-3" class="topic-explanation px-5 pb-6">
+      <div class="border-t border-dark-600 pt-5 space-y-5">
+        <div><h3 class="text-base font-semibold text-teal-400 mb-2">🟢 O que é</h3><p class="text-neutral-300 text-sm leading-relaxed">O Campaign Manager é o "diretor de campanha" — lê o brand.md, cria o task_manifest.json com as tarefas de cada agente e, ao final, consolida todos os outputs em um relatório executivo.</p></div>
+        <div><h3 class="text-base font-semibold text-teal-400 mb-3">🔑 Prompt de ativação do Campaign Manager</h3>
+          <div class="bg-teal-500/5 border border-teal-500/20 rounded-xl p-4">
+            <pre class="bg-dark-900 rounded-lg p-3 text-xs text-neutral-300 overflow-x-auto font-mono">Você é o Campaign Manager. Leia brand.md e crie
+task_manifest.json com as tarefas para cada agente.
+Depois, ao receber os outputs deles, gere um relatório
+final de campanha consolidado em /output/campaign-report.md</pre>
+          </div>
+        </div>
+        <div><h3 class="text-base font-semibold text-teal-400 mb-3">🔑 Estrutura do task_manifest.json</h3>
+          <div class="bg-dark-700/40 border border-dark-600 rounded-xl p-4">
+            <pre class="bg-dark-900 rounded-lg p-3 text-xs text-neutral-300 overflow-x-auto font-mono">{
+  "campaign": "Q3 Lead Generation",
+  "tasks": [
+    {
+      "agent": "research",
+      "task": "Analise os 3 principais concorrentes",
+      "output": "output/research/competitors.md",
+      "status": "pending"
+    },
+    {
+      "agent": "strategy",
+      "task": "Crie plano de conteúdo para 30 dias",
+      "output": "output/strategy/content-plan.md",
+      "status": "pending",
+      "depends_on": ["research"]
+    }
+  ]
+}</pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5.4 -->
+  <div class="mb-6 rounded-2xl border border-dark-600 bg-dark-800 overflow-hidden" id="modulo-5-4">
+    <button onclick="toggleTopic(this)" aria-expanded="false" aria-controls="exp-5-4" class="w-full flex justify-start items-center gap-4 p-5 hover:bg-dark-700 transition text-left">
+      <span class="text-teal-400 text-xs font-bold w-6 flex-shrink-0">5.4</span>
+      <span class="w-8 h-8 rounded-full bg-teal-500/20 text-teal-400 border border-teal-500/30 flex items-center justify-center text-sm font-bold flex-shrink-0">4</span>
+      <div class="flex-1 min-w-0"><h2 class="text-xl font-bold">Research Agent + Content Strategy</h2><p class="text-sm text-neutral-400 mt-0.5">concorrentes · dados de mercado · plano de conteúdo 30 dias</p></div>
+      <span class="text-xs text-neutral-500 hidden sm:block">~9 min</span>
+      <svg class="w-5 h-5 text-neutral-400 flex-shrink-0 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+    </button>
+    <div id="exp-5-4" class="topic-explanation px-5 pb-6">
+      <div class="border-t border-dark-600 pt-5 space-y-5">
+        <div><h3 class="text-base font-semibold text-teal-400 mb-2">🟢 Research Agent</h3><p class="text-neutral-300 text-sm leading-relaxed">O Research Agent analisa o mercado: busca dados de concorrentes, tendências do setor e oportunidades. Salva tudo organizado em <code class="text-teal-400">/output/research/</code>.</p></div>
+        <div><h3 class="text-base font-semibold text-teal-400 mb-3">🔑 SKILL.md do Research Agent</h3>
+          <div class="bg-teal-500/5 border border-teal-500/20 rounded-xl p-4">
+            <div class="text-xs font-bold text-teal-400 mb-2">Prompt 3 — criar agents/research/SKILL.md</div>
+            <pre class="bg-dark-900 rounded-lg p-3 text-xs text-neutral-300 overflow-x-auto font-mono">Crie SKILL.md para o Research Agent que:
+- Analisa os 3 principais concorrentes da marca
+- Coleta dados do mercado (tamanho, crescimento)
+- Identifica lacunas e oportunidades
+- Salva relatório em /output/research/
+- Formato: markdown estruturado com fontes</pre>
+          </div>
+        </div>
+        <div><h3 class="text-base font-semibold text-teal-400 mb-2">🟢 Content Strategy Agent</h3><p class="text-neutral-300 text-sm leading-relaxed">Usa os dados do Research para criar um plano de conteúdo estratégico: calendário de 30 dias, temas por canal, pilares de conteúdo alinhados com brand.md.</p></div>
+        <div class="bg-teal-500/5 border border-teal-500/20 rounded-xl p-4">
+          <div class="text-xs font-bold text-teal-400 mb-2">SKILL.md do Content Strategy</div>
+          <pre class="bg-dark-900 rounded-lg p-3 text-xs text-neutral-300 overflow-x-auto font-mono">Crie SKILL.md para o Content Strategy Agent:
+- Lê /output/research/ e brand.md
+- Cria calendário de conteúdo (30 dias)
+- Define pilares por canal (LinkedIn, IG, email)
+- Salva em /output/strategy/content-plan.md</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5.5 -->
+  <div class="mb-6 rounded-2xl border border-dark-600 bg-dark-800 overflow-hidden" id="modulo-5-5">
+    <button onclick="toggleTopic(this)" aria-expanded="false" aria-controls="exp-5-5" class="w-full flex justify-start items-center gap-4 p-5 hover:bg-dark-700 transition text-left">
+      <span class="text-teal-400 text-xs font-bold w-6 flex-shrink-0">5.5</span>
+      <span class="w-8 h-8 rounded-full bg-teal-500/20 text-teal-400 border border-teal-500/30 flex items-center justify-center text-sm font-bold flex-shrink-0">5</span>
+      <div class="flex-1 min-w-0"><h2 class="text-xl font-bold">Creative Copy + Data Analysis</h2><p class="text-sm text-neutral-400 mt-0.5">posts prontos · headlines · análise de métricas · KPIs</p></div>
+      <span class="text-xs text-neutral-500 hidden sm:block">~9 min</span>
+      <svg class="w-5 h-5 text-neutral-400 flex-shrink-0 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+    </button>
+    <div id="exp-5-5" class="topic-explanation px-5 pb-6">
+      <div class="border-t border-dark-600 pt-5 space-y-5">
+        <div><h3 class="text-base font-semibold text-teal-400 mb-2">🟢 Creative Copy Agent</h3><p class="text-neutral-300 text-sm leading-relaxed">Transforma o plano de conteúdo em peças prontas para publicar: posts para cada canal, headlines para email, variações A/B para testar. Usa o tom definido em brand.md.</p></div>
+        <div class="bg-teal-500/5 border border-teal-500/20 rounded-xl p-4">
+          <div class="text-xs font-bold text-teal-400 mb-2">SKILL.md do Creative Copy Agent</div>
+          <pre class="bg-dark-900 rounded-lg p-3 text-xs text-neutral-300 overflow-x-auto font-mono">Crie SKILL.md para o Creative Copy Agent:
+- Lê brand.md e /output/strategy/content-plan.md
+- Escreve posts completos para LinkedIn, Instagram
+- Cria 3 variações de subject line para email
+- Tom: conforme brand.md
+- Salva tudo em /output/copy/</pre>
+        </div>
+        <div><h3 class="text-base font-semibold text-teal-400 mb-2">🟢 Data Analysis Agent</h3><p class="text-neutral-300 text-sm leading-relaxed">Analisa resultados de campanhas anteriores, identifica padrões de performance e sugere otimizações baseadas em dados. Entrega relatórios de KPIs em <code class="text-teal-400">/output/data/</code>.</p></div>
+        <div class="bg-teal-500/5 border border-teal-500/20 rounded-xl p-4">
+          <div class="text-xs font-bold text-teal-400 mb-2">SKILL.md do Data Analysis Agent</div>
+          <pre class="bg-dark-900 rounded-lg p-3 text-xs text-neutral-300 overflow-x-auto font-mono">Crie SKILL.md para o Data Analysis Agent:
+- Analisa dados de campanhas anteriores (CSV/JSON)
+- Calcula CTR, conversão, CAC, ROAS
+- Identifica top 3 conteúdos por engajamento
+- Recomendações de otimização
+- Salva relatório em /output/data/analysis.md</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5.6 -->
+  <div class="mb-6 rounded-2xl border border-dark-600 bg-dark-800 overflow-hidden" id="modulo-5-6">
+    <button onclick="toggleTopic(this)" aria-expanded="false" aria-controls="exp-5-6" class="w-full flex justify-start items-center gap-4 p-5 hover:bg-dark-700 transition text-left">
+      <span class="text-teal-400 text-xs font-bold w-6 flex-shrink-0">5.6</span>
+      <span class="w-8 h-8 rounded-full bg-teal-500/20 text-teal-400 border border-teal-500/30 flex items-center justify-center text-sm font-bold flex-shrink-0">6</span>
+      <div class="flex-1 min-w-0"><h2 class="text-xl font-bold">Coordenação com task_manifest.json</h2><p class="text-sm text-neutral-400 mt-0.5">paralelo vs sequencial · status tracking · entregáveis organizados</p></div>
+      <span class="text-xs text-neutral-500 hidden sm:block">~11 min</span>
+      <svg class="w-5 h-5 text-neutral-400 flex-shrink-0 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+    </button>
+    <div id="exp-5-6" class="topic-explanation px-5 pb-6">
+      <div class="border-t border-dark-600 pt-5 space-y-5">
+        <div><h3 class="text-base font-semibold text-teal-400 mb-2">🟢 O que é</h3><p class="text-neutral-300 text-sm leading-relaxed">O <code class="text-teal-400">task_manifest.json</code> é o "quadro de tarefas" da equipe. O Campaign Manager o cria, os agentes atualizam seus status e o manifesto garante que o fluxo de trabalho seja respeitado (ex: strategy só roda após research).</p></div>
+        <div><h3 class="text-base font-semibold text-teal-400 mb-3">🔑 Execução em paralelo vs sequencial</h3>
+          <div class="grid sm:grid-cols-2 gap-3">
+            <div class="bg-teal-500/5 border border-teal-500/20 rounded-xl p-4">
+              <div class="text-xs font-bold text-teal-400 mb-2">🔀 Em PARALELO (sem dependência)</div>
+              <ul class="text-xs text-neutral-300 space-y-1">
+                <li>• Research + Data Analysis juntos</li>
+                <li>• Rodam simultaneamente no Codex</li>
+                <li>• Usa subagentes do Codex</li>
+              </ul>
+            </div>
+            <div class="bg-dark-700/40 border border-dark-600 rounded-xl p-4">
+              <div class="text-xs font-bold text-neutral-400 mb-2">⬇️ Em SEQUÊNCIA (com dependência)</div>
+              <ul class="text-xs text-neutral-300 space-y-1">
+                <li>• Research → Content Strategy</li>
+                <li>• Strategy → Creative Copy</li>
+                <li>• Todos → Campaign Manager (final)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div><h3 class="text-base font-semibold text-teal-400 mb-3">🔑 Comando de execução da campanha</h3>
+          <div class="bg-teal-500/5 border border-teal-500/20 rounded-xl p-4">
+            <pre class="bg-dark-900 rounded-lg p-3 text-xs text-neutral-300 overflow-x-auto font-mono">codex "Leia task_manifest.json e execute todas as tarefas
+pendentes. Para tarefas sem dependência, execute em paralelo.
+Atualize o status de cada tarefa no manifesto e salve os
+outputs nas pastas corretas. Ao finalizar tudo, gere
+campaign-report.md com resumo executivo."</pre>
+          </div>
+        </div>
+        <div class="bg-dark-700/40 border border-dark-600 rounded-xl p-3">
+          <p class="text-xs text-neutral-300"><span class="text-teal-400 font-semibold">Resultado:</span> Campanha completa em <code class="text-teal-400">/output/</code> — pesquisa, estratégia, posts prontos, análise de dados e relatório executivo. Tudo organizado, tudo versionável no git.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="flex items-center justify-between mt-10 pt-8 border-t border-dark-700">
+    <a href="../trilha4/" class="text-sm text-neutral-400 hover:text-neutral-200 transition">← T4 BMAD</a>
+    <a href="../trilha6/" class="text-sm text-rose-400 hover:text-rose-300 transition">Próxima: T6 WhatsApp →</a>
+  </div>
+</div>
+
+<footer class="border-t border-dark-700 py-10 px-4 mt-8">
+  <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+    <div class="flex items-center gap-3"><span class="text-primary font-black text-lg">INEMA</span><span class="text-dark-600">|</span><a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm">INEMA.CLUB</a></div>
+    <p class="text-sm text-neutral-500">Canal <a href="https://t.me/c/3053650449/2" target="_blank" class="text-amber-400 hover:text-amber-300">INEMA.Codex</a> · maio 2026</p>
+    <p class="text-xs text-neutral-600"><a href="https://github.com/inematds/codexbasico" target="_blank" class="hover:text-neutral-400">inematds/codexbasico</a></p>
+  </div>
+</footer>
+
+<script>
+  function toggleTopic(btn){const id=btn.getAttribute('aria-controls');const panel=document.getElementById(id);const svg=btn.querySelector('svg:last-child');const isOpen=panel.classList.contains('open');panel.classList.toggle('open',!isOpen);btn.setAttribute('aria-expanded',String(!isOpen));if(svg)svg.style.transform=isOpen?'':'rotate(180deg)';}
+  function toggleTheme(){const html=document.documentElement;const isDark=html.classList.toggle('dark');document.getElementById('icon-sun').classList.toggle('hidden',isDark);document.getElementById('icon-moon').classList.toggle('hidden',!isDark);try{localStorage.setItem('inema.prefs',JSON.stringify({dark:isDark}));}catch(e){}}
+  (function(){const isDark=document.documentElement.classList.contains('dark');document.getElementById('icon-sun').classList.toggle('hidden',isDark);document.getElementById('icon-moon').classList.toggle('hidden',!isDark);})();
+</script>
+</body>
+</html>

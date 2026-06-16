@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Trilha 1 — Codex Básico | INEMA.CLUB</title>
+  <meta name="inema-course" content="codexbasico"/>
+  <script>
+    try {
+      var p = JSON.parse(localStorage.getItem('inema.prefs') || '{}');
+      if (p.dark === false) document.documentElement.classList.remove('dark');
+      else document.documentElement.classList.add('dark');
+    } catch(e) { document.documentElement.classList.add('dark'); }
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { darkMode: 'class', theme: { extend: { colors: { 'dark-900': '#0f172a', 'dark-800': '#1e293b', 'dark-700': '#334155', 'dark-600': '#475569', primary: '#FACC15' } } } }
+  </script>
+  <style>
+    html:not(.dark) body { background-color: #f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .text-neutral-100 { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+    html:not(.dark) .text-primary { color: #a16207; }
+    html:not(.dark) .text-sky-400 { color: #0369a1; }
+    html:not(.dark) nav { background-color: rgba(255,255,255,0.95) !important; border-bottom-color: #e5e7eb !important; }
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+    html:not(.dark) .text-emerald-400 { color: #059669; }
+    html:not(.dark) .bg-emerald-500\/20 { background-color: rgba(5,150,105,0.12); }
+    html:not(.dark) .border-emerald-500\/30 { border-color: rgba(5,150,105,0.25); }
+    html:not(.dark) .text-blue-400 { color: #2563eb; }
+    html:not(.dark) .text-purple-400 { color: #7c3aed; }
+    html:not(.dark) .text-amber-400 { color: #92400e; }
+    html:not(.dark) .text-teal-400 { color: #0d9488; }
+    html:not(.dark) .text-rose-400 { color: #9f1239; }
+    html:not(.dark) svg[role="img"] { filter: saturate(0.82) brightness(0.96); }
+    .dark .border-dark-600 { border-color: #374151; }
+    .dark .divide-dark-600 > :not([hidden]) ~ :not([hidden]) { border-color: #374151; }
+    .topic-explanation { display: none; }
+    .topic-explanation.open { display: block; }
+    [id] { scroll-margin-top: 72px; }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+<nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between gap-4">
+    <div class="flex items-center gap-3 min-w-0">
+      <a href="../../" class="text-primary font-black text-xl tracking-tight">INEMA</a>
+      <span class="text-dark-600 hidden sm:inline">|</span>
+      <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium hidden sm:inline">INEMA.CLUB</a>
+    </div>
+    <div class="flex items-center gap-1.5 flex-wrap">
+      <a href="../trilha1/" class="text-xs px-2.5 py-1.5 rounded-lg bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 font-medium">T1 Básico</a>
+      <a href="../trilha2/" class="text-xs px-2.5 py-1.5 rounded-lg bg-dark-700 text-neutral-300 hover:text-blue-400 transition">T2 Terminal</a>
+      <a href="../trilha3/" class="text-xs px-2.5 py-1.5 rounded-lg bg-dark-700 text-neutral-300 hover:text-purple-400 transition hidden sm:inline">T3 Builder</a>
+      <a href="../trilha4/" class="text-xs px-2.5 py-1.5 rounded-lg bg-dark-700 text-neutral-300 hover:text-amber-400 transition hidden md:inline">T4 BMAD</a>
+      <a href="../trilha5/" class="text-xs px-2.5 py-1.5 rounded-lg bg-dark-700 text-neutral-300 hover:text-teal-400 transition hidden md:inline">T5 Equipe</a>
+      <a href="../trilha6/" class="text-xs px-2.5 py-1.5 rounded-lg bg-dark-700 text-neutral-300 hover:text-rose-400 transition hidden lg:inline">T6 WhatsApp</a>
+      <button onclick="toggleTheme()" aria-label="Alternar tema" class="w-8 h-8 rounded-lg bg-dark-700 hover:bg-dark-600 flex items-center justify-center transition text-neutral-400">
+        <svg id="icon-sun" class="w-4 h-4 hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"/></svg>
+        <svg id="icon-moon" class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- TRAIL HEADER -->
+<header class="bg-gradient-to-br from-emerald-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <span class="inline-block px-3 py-1 bg-emerald-500/20 text-emerald-400 text-xs font-semibold rounded-full mb-4 border border-emerald-500/30">TRILHA 1</span>
+    <h1 class="text-3xl sm:text-4xl font-black mb-3">🟢 Codex Básico — Do Zero ao Avançado</h1>
+    <p class="text-neutral-300 text-lg mb-6 max-w-2xl">Domine o Codex CLI da OpenAI do zero ao avançado: instalação, comandos, skills, subagentes e projetos reais.</p>
+    <div class="flex flex-wrap gap-4 text-sm">
+      <span class="flex items-center gap-1.5 text-neutral-400"><span class="w-2 h-2 rounded-full bg-emerald-400"></span>10 módulos</span>
+      <span class="flex items-center gap-1.5 text-neutral-400"><span class="w-2 h-2 rounded-full bg-emerald-400"></span>~60 minutos</span>
+      <span class="flex items-center gap-1.5 text-neutral-400"><span class="w-2 h-2 rounded-full bg-emerald-400"></span>Básico ao Avançado</span>
+    </div>
+  </div>
+</header>
+
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+
+  <!-- MAPA DA TRILHA (OBRIGATÓRIO) -->
+  <section id="mapa-da-trilha" class="mb-12">
+    <h2 class="text-2xl font-bold mb-6">Mapa da trilha</h2>
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+      <a href="#modulo-1-1" class="bg-dark-800 rounded-xl border border-dark-600 hover:border-emerald-500/40 p-4 transition block">
+        <div class="flex items-center justify-between mb-2"><span class="text-emerald-400 text-sm font-bold">1.1</span><span class="text-xs text-neutral-500">~6 min</span></div>
+        <div class="font-semibold text-sm mb-1">🔍 O que é Codex</div>
+        <p class="text-xs text-neutral-400">CLI, App e Web em perspectiva</p>
+      </a>
+      <a href="#modulo-1-2" class="bg-dark-800 rounded-xl border border-dark-600 hover:border-emerald-500/40 p-4 transition block">
+        <div class="flex items-center justify-between mb-2"><span class="text-emerald-400 text-sm font-bold">1.2</span><span class="text-xs text-neutral-500">~8 min</span></div>
+        <div class="font-semibold text-sm mb-1">📦 Instalação</div>
+        <p class="text-xs text-neutral-400">Node.js, npm, login device auth</p>
+      </a>
+      <a href="#modulo-1-3" class="bg-dark-800 rounded-xl border border-dark-600 hover:border-emerald-500/40 p-4 transition block">
+        <div class="flex items-center justify-between mb-2"><span class="text-emerald-400 text-sm font-bold">1.3</span><span class="text-xs text-neutral-500">~6 min</span></div>
+        <div class="font-semibold text-sm mb-1">⌨️ Primeiros Comandos</div>
+        <p class="text-xs text-neutral-400">/ @ agents.md contexto</p>
+      </a>
+      <a href="#modulo-1-4" class="bg-dark-800 rounded-xl border border-dark-600 hover:border-emerald-500/40 p-4 transition block">
+        <div class="flex items-center justify-between mb-2"><span class="text-emerald-400 text-sm font-bold">1.4</span><span class="text-xs text-neutral-500">~6 min</span></div>
+        <div class="font-semibold text-sm mb-1">⚙️ Aprovação e Config</div>
+        <p class="text-xs text-neutral-400">flags, config.toml, sandbox</p>
+      </a>
+      <a href="#modulo-1-5" class="bg-dark-800 rounded-xl border border-dark-600 hover:border-emerald-500/40 p-4 transition block">
+        <div class="flex items-center justify-between mb-2"><span class="text-emerald-400 text-sm font-bold">1.5</span><span class="text-xs text-neutral-500">~6 min</span></div>
+        <div class="font-semibold text-sm mb-1">🎯 Skills</div>
+        <p class="text-xs text-neutral-400">SKILL.md, invoke, reutilizar</p>
+      </a>
+      <a href="#modulo-1-6" class="bg-dark-800 rounded-xl border border-dark-600 hover:border-emerald-500/40 p-4 transition block">
+        <div class="flex items-center justify-between mb-2"><span class="text-emerald-400 text-sm font-bold">1.6</span><span class="text-xs text-neutral-500">~6 min</span></div>
+        <div class="font-semibold text-sm mb-1">🤖 Tipos de Agente</div>
+        <p class="text-xs text-neutral-400">10 tipos, threads, workers</p>
+      </a>
+      <a href="#modulo-1-7" class="bg-dark-800 rounded-xl border border-dark-600 hover:border-emerald-500/40 p-4 transition block">
+        <div class="flex items-center justify-between mb-2"><span class="text-emerald-400 text-sm font-bold">1.7</span><span class="text-xs text-neutral-500">~8 min</span></div>
+        <div class="font-semibold text-sm mb-1">⚡ Subagentes</div>
+        <p class="text-xs text-neutral-400">Paralelo, fórmula de prompt</p>
+      </a>
+      <a href="#modulo-1-8" class="bg-dark-800 rounded-xl border border-dark-600 hover:border-emerald-500/40 p-4 transition block">
+        <div class="flex items-center justify-between mb-2"><span class="text-emerald-400 text-sm font-bold">1.8</span><span class="text-xs text-neutral-500">~6 min</span></div>
+        <div class="font-semibold text-sm mb-1">🌿 Worktrees</div>
+        <p class="text-xs text-neutral-400">Git paralelo, PRs automáticos</p>
+      </a>
+      <a href="#modulo-1-9" class="bg-dark-800 rounded-xl border border-dark-600 hover:border-emerald-500/40 p-4 transition block">
+        <div class="flex items-center justify-between mb-2"><span class="text-emerald-400 text-sm font-bold">1.9</span><span class="text-xs text-neutral-500">~6 min</span></div>
+        <div class="font-semibold text-sm mb-1">🔄 Automações</div>
+        <p class="text-xs text-neutral-400">Agendamento, CI/CD, rotinas</p>
+      </a>
+      <a href="#modulo-1-10" class="bg-dark-800 rounded-xl border border-dark-600 hover:border-emerald-500/40 p-4 transition block">
+        <div class="flex items-center justify-between mb-2"><span class="text-emerald-400 text-sm font-bold">1.10</span><span class="text-xs text-neutral-500">~8 min</span></div>
+        <div class="font-semibold text-sm mb-1">🚀 Projeto Real</div>
+        <p class="text-xs text-neutral-400">App completo com multitasking</p>
+      </a>
+    </div>
+  </section>
+
+  <h2 class="text-2xl font-bold mb-6">Conteúdo detalhado</h2>
+
+  <!-- Módulo 1.1 -->
+  <div class="mb-6 rounded-2xl border border-dark-600 bg-dark-800 overflow-hidden" id="modulo-1-1">
+    <button onclick="toggleTopic(this)" aria-expanded="false" aria-controls="exp-1-1"
+            class="w-full flex justify-start items-center gap-4 p-5 hover:bg-dark-700 transition text-left">
+      <span class="text-emerald-400 text-xs font-bold w-6 flex-shrink-0">1.1</span>
+      <span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center justify-center text-sm font-bold flex-shrink-0">1</span>
+      <div class="flex-1 min-w-0">
+        <h2 class="text-xl font-bold">O que é o Codex</h2>
+        <p class="text-sm text-neutral-400 mt-0.5">CLI · App · Web · quando usar cada versão</p>
+      </div>
+      <span class="text-xs text-neutral-500 hidden sm:block">~6 min</span>
+      <svg class="w-5 h-5 text-neutral-400 flex-shrink-0 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+    </button>
+    <div id="exp-1-1" class="topic-explanation px-5 pb-6">
+      <div class="border-t border-dark-600 pt-5 space-y-5">
+        <div><h3 class="text-base font-semibold text-emerald-400 mb-2">🟢 O que é</h3><p class="text-neutral-300 text-sm leading-relaxed">O <strong>Codex</strong> é o agente de codificação da OpenAI — rival do Claude Code. Diferencial: roda agentes <strong>na nuvem</strong>, delega tarefas remotamente (até pelo celular) e retorna pull requests prontos. Contexto de 274K tokens.</p></div>
+        <div><h3 class="text-base font-semibold text-emerald-400 mb-2">💡 Por que aprender</h3><p class="text-neutral-300 text-sm leading-relaxed">Contexto maior que Claude Code, suporte nativo a worktrees, integração direta com GitHub Actions. Para tarefas longas em nuvem é complemento natural ao Claude.</p></div>
+        <div><h3 class="text-base font-semibold text-emerald-400 mb-3">🔑 As 3 versões</h3>
+          <div class="overflow-x-auto rounded-xl border border-dark-600"><table class="w-full text-sm"><thead class="bg-dark-700"><tr><th class="text-left px-4 py-3 text-neutral-300 font-semibold">Versão</th><th class="text-left px-4 py-3 text-neutral-300 font-semibold">Melhor para</th><th class="text-left px-4 py-3 text-neutral-300 font-semibold">Detalhe</th></tr></thead><tbody class="divide-y divide-dark-600"><tr class="hover:bg-dark-700/50"><td class="px-4 py-3 text-emerald-400 font-mono text-xs font-semibold">CLI (terminal)</td><td class="px-4 py-3 text-neutral-300 text-xs">Velocidade + controle local</td><td class="px-4 py-3 text-neutral-400 text-xs">macOS, Windows, Linux. Integração direta com repositórios</td></tr><tr class="hover:bg-dark-700/50"><td class="px-4 py-3 text-sky-400 font-mono text-xs font-semibold">App (Windows)</td><td class="px-4 py-3 text-neutral-300 text-xs">Interface visual completa</td><td class="px-4 py-3 text-neutral-400 text-xs">Skills, plugins, navegador interno, várias threads paralelas</td></tr><tr class="hover:bg-dark-700/50"><td class="px-4 py-3 text-amber-400 font-mono text-xs font-semibold">Web (ChatGPT)</td><td class="px-4 py-3 text-neutral-300 text-xs">Delegar em nuvem</td><td class="px-4 py-3 text-neutral-400 text-xs">GitHub conectado, agentes sem PC ligado, acesso pelo celular</td></tr></tbody></table></div>
+        </div>
+        <div class="flex justify-start gap-3 pt-2">
+          <a href="../../basico.html#modulo-1" class="px-4 py-2 text-sm bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg transition">Ver Completo</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Módulo 1.2 -->
+  <div class="mb-6 rounded-2xl border border-dark-600 bg-dark-800 overflow-hidden" id="modulo-1-2">
+    <button onclick="toggleTopic(this)" aria-expanded="false" aria-controls="exp-1-2"
+            class="w-full flex justify-start items-center gap-4 p-5 hover:bg-dark-700 transition text-left">
+      <span class="text-emerald-400 text-xs font-bold w-6 flex-shrink-0">1.2</span>
+      <span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center justify-center text-sm font-bold flex-shrink-0">2</span>
+      <div class="flex-1 min-w-0">
+        <h2 class="text-xl font-bold">Instalação e Login</h2>
+        <p class="text-sm text-neutral-400 mt-0.5">Node.js · npm install · device auth · Windows + Linux</p>
+      </div>
+      <span class="text-xs text-neutral-500 hidden sm:block">~8 min</span>
+      <svg class="w-5 h-5 text-neutral-400 flex-shrink-0 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+    </button>
+    <div id="exp-1-2" class="topic-explanation px-5 pb-6">
+      <div class="border-t border-dark-600 pt-5 space-y-5">
+        <div><h3 class="text-base font-semibold text-emerald-400 mb-2">🟢 O que é</h3><p class="text-neutral-300 text-sm leading-relaxed">Instalação via <code class="bg-dark-700 px-1.5 py-0.5 rounded text-amber-400 text-xs font-mono">npm</code>. Pré-requisito: Node.js v18+. Login usa <em>device auth</em> — você abre um link no browser, sem expor chave de API.</p></div>
+        <div><h3 class="text-base font-semibold text-emerald-400 mb-2">💡 Por que aprender</h3><p class="text-neutral-300 text-sm leading-relaxed">Node.js desatualizado causa falhas silenciosas. O device auth é mais seguro que API key — funciona em containers Docker sem variáveis de ambiente expostas.</p></div>
+        <div><h3 class="text-base font-semibold text-emerald-400 mb-3">🔑 Passo a passo</h3>
+          <div class="space-y-3">
+            <div class="bg-dark-700/40 border border-dark-600 rounded-xl p-4"><div class="text-xs font-bold text-neutral-400 mb-2 uppercase tracking-wider">Passo 1 — Instalar Node.js</div>
+              <div class="grid sm:grid-cols-2 gap-3"><div><div class="text-xs text-neutral-500 mb-1">🟩 Windows</div><pre class="bg-dark-900 rounded-lg p-3 text-xs text-amber-300 overflow-x-auto font-mono">winget install --id Git.Git -e --source winget
+# depois instale Node.js em nodejs.org</pre></div>
+              <div><div class="text-xs text-neutral-500 mb-1">🟦 Linux</div><pre class="bg-dark-900 rounded-lg p-3 text-xs text-amber-300 overflow-x-auto font-mono">curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+sudo apt-get install -y nodejs</pre></div></div></div>
+            <div class="bg-dark-700/40 border border-dark-600 rounded-xl p-4"><div class="text-xs font-bold text-neutral-400 mb-2 uppercase tracking-wider">Passo 2 — Instalar Codex</div><pre class="bg-dark-900 rounded-lg p-3 text-xs text-amber-300 overflow-x-auto font-mono">npm install -g @openai/codex</pre></div>
+            <div class="bg-amber-500/5 border border-amber-500/30 rounded-xl p-4"><div class="text-xs font-bold text-amber-400 mb-2 uppercase tracking-wider">Passo 3 — Login</div><pre class="bg-dark-900 rounded-lg p-3 text-xs text-amber-300 overflow-x-auto font-mono">codex login --device-auth
+# Abre link no browser → digita código → ✓ logado</pre></div>
+          </div>
+        </div>
+        <div class="flex justify-start gap-3 pt-2">
+          <a href="../../basico.html#modulo-2" class="px-4 py-2 text-sm bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg transition">Ver Completo</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Módulo 1.3 -->
+  <div class="mb-6 rounded-2xl border border-dark-600 bg-dark-800 overflow-hidden" id="modulo-1-3">
+    <button onclick="toggleTopic(this)" aria-expanded="false" aria-controls="exp-1-3"
+            class="w-full flex justify-start items-center gap-4 p-5 hover:bg-dark-700 transition text-left">
+      <span class="text-emerald-400 text-xs font-bold w-6 flex-shrink-0">1.3</span>
+      <span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center justify-center text-sm font-bold flex-shrink-0">3</span>
+      <div class="flex-1 min-w-0">
+        <h2 class="text-xl font-bold">Primeiros Comandos</h2>
+        <p class="text-sm text-neutral-400 mt-0.5">/ comandos · @ referências · agents.md · contexto do projeto</p>
+      </div>
+      <span class="text-xs text-neutral-500 hidden sm:block">~6 min</span>
+      <svg class="w-5 h-5 text-neutral-400 flex-shrink-0 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+    </button>
+    <div id="exp-1-3" class="topic-explanation px-5 pb-6">
+      <div class="border-t border-dark-600 pt-5 space-y-5">
+        <div><h3 class="text-base font-semibold text-emerald-400 mb-2">🟢 O que é</h3><p class="text-neutral-300 text-sm leading-relaxed">Após instalar, <code class="bg-dark-700 px-1.5 py-0.5 rounded text-amber-400 text-xs font-mono">codex</code> abre modo interativo. <code class="bg-dark-700 px-1.5 py-0.5 rounded text-amber-400 text-xs font-mono">/</code> acessa comandos internos, <code class="bg-dark-700 px-1.5 py-0.5 rounded text-amber-400 text-xs font-mono">@</code> referencia arquivos do projeto.</p></div>
+        <div><h3 class="text-base font-semibold text-emerald-400 mb-2">💡 Por que aprender</h3><p class="text-neutral-300 text-sm leading-relaxed">O <strong>agents.md</strong> é equivalente ao CLAUDE.md — define contexto permanente. Sem ele o Codex parte do zero em cada sessão.</p></div>
+        <div><h3 class="text-base font-semibold text-emerald-400 mb-3">🔑 Conceitos-chave</h3>
+          <pre class="bg-dark-900 rounded-lg p-3 text-xs text-amber-300 overflow-x-auto font-mono mb-3">codex                    # modo interativo
+codex "crie uma API"     # prompt direto
+codex chat               # modo conversa
+codex --full-auto "..."  # sem confirmação</pre>
+          <div class="grid sm:grid-cols-2 gap-2 text-sm bg-dark-700/40 border border-dark-600 rounded-xl p-4">
+            <div class="flex gap-2"><code class="text-amber-400 font-mono text-xs">/plan mode</code><span class="text-neutral-400 text-xs">— planejamento</span></div>
+            <div class="flex gap-2"><code class="text-amber-400 font-mono text-xs">/model</code><span class="text-neutral-400 text-xs">— trocar modelo</span></div>
+            <div class="flex gap-2"><code class="text-amber-400 font-mono text-xs">/browser use</code><span class="text-neutral-400 text-xs">— ativar browser</span></div>
+            <div class="flex gap-2"><code class="text-amber-400 font-mono text-xs">/skill creator</code><span class="text-neutral-400 text-xs">— criar skill</span></div>
+          </div>
+        </div>
+        <div class="flex justify-start gap-3 pt-2">
+          <a href="../../basico.html#modulo-3" class="px-4 py-2 text-sm bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg transition">Ver Completo</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Módulo 1.4 -->
+  <div class="mb-6 rounded-2xl border border-dark-600 bg-dark-800 overflow-hidden" id="modulo-1-4">
+    <button onclick="toggleTopic(this)" aria-expanded="false" aria-controls="exp-1-4"
+            class="w-full flex justify-start items-center gap-4 p-5 hover:bg-dark-700 transition text-left">
+      <span class="text-emerald-400 text-xs font-bold w-6 flex-shrink-0">1.4</span>
+      <span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center justify-center text-sm font-bold flex-shrink-0">4</span>
+      <div class="flex-1 min-w-0">
+        <h2 class="text-xl font-bold">Modos de Aprovação e Config</h2>
+        <p class="text-sm text-neutral-400 mt-0.5">flags · --full-auto · config.toml · sandbox modes</p>
+      </div>
+      <span class="text-xs text-neutral-500 hidden sm:block">~6 min</span>
+      <svg class="w-5 h-5 text-neutral-400 flex-shrink-0 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+    </button>
+    <div id="exp-1-4" class="topic-explanation px-5 pb-6">
+      <div class="border-t border-dark-600 pt-5 space-y-5">
+        <div><h3 class="text-base font-semibold text-emerald-400 mb-2">🟢 O que é</h3><p class="text-neutral-300 text-sm leading-relaxed">Approval policies controlam quando o Codex pede confirmação. De sempre perguntar até nunca — ajuste conforme o ambiente (dev local vs produção).</p></div>
+        <div><h3 class="text-base font-semibold text-emerald-400 mb-2">💡 Por que aprender</h3><p class="text-neutral-300 text-sm leading-relaxed">Em container ou VM isolada, desativar confirmações elimina atrito e acelera muito. Em produção, sempre manter confirmações ativas.</p></div>
+        <div><h3 class="text-base font-semibold text-emerald-400 mb-3">🔑 Flags principais</h3>
+          <div class="overflow-x-auto rounded-xl border border-dark-600"><table class="w-full text-sm"><thead class="bg-dark-700"><tr><th class="text-left px-4 py-2 text-neutral-300 font-semibold text-xs">Flag</th><th class="text-left px-4 py-2 text-neutral-300 font-semibold text-xs">Comportamento</th><th class="text-left px-4 py-2 text-neutral-300 font-semibold text-xs">Risco</th></tr></thead><tbody class="divide-y divide-dark-600 text-xs"><tr class="hover:bg-dark-700/50"><td class="px-4 py-2 font-mono text-amber-400">--full-auto</td><td class="px-4 py-2 text-neutral-300">on-request + sandbox write</td><td class="px-4 py-2 text-amber-400">Médio</td></tr><tr class="hover:bg-dark-700/50"><td class="px-4 py-2 font-mono text-amber-400">-a never</td><td class="px-4 py-2 text-neutral-300">Nunca pede aprovação</td><td class="px-4 py-2 text-amber-400">Médio</td></tr><tr class="hover:bg-dark-700/50"><td class="px-4 py-2 font-mono text-red-400">--dangerously-bypass...</td><td class="px-4 py-2 text-neutral-300">Zero confirmações, zero sandbox</td><td class="px-4 py-2 text-red-400">Alto ⚠️</td></tr></tbody></table></div>
+        </div>
+        <div class="flex justify-start gap-3 pt-2">
+          <a href="../../basico.html#modulo-4" class="px-4 py-2 text-sm bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg transition">Ver Completo</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Módulo 1.5 -->
+  <div class="mb-6 rounded-2xl border border-dark-600 bg-dark-800 overflow-hidden" id="modulo-1-5">
+    <button onclick="toggleTopic(this)" aria-expanded="false" aria-controls="exp-1-5"
+            class="w-full flex justify-start items-center gap-4 p-5 hover:bg-dark-700 transition text-left">
+      <span class="text-emerald-400 text-xs font-bold w-6 flex-shrink-0">1.5</span>
+      <span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center justify-center text-sm font-bold flex-shrink-0">5</span>
+      <div class="flex-1 min-w-0">
+        <h2 class="text-xl font-bold">Skills — Receitas Reutilizáveis</h2>
+        <p class="text-sm text-neutral-400 mt-0.5">SKILL.md · .agents/skills/ · $invoke · exemplos práticos</p>
+      </div>
+      <span class="text-xs text-neutral-500 hidden sm:block">~6 min</span>
+      <svg class="w-5 h-5 text-neutral-400 flex-shrink-0 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+    </button>
+    <div id="exp-1-5" class="topic-explanation px-5 pb-6">
+      <div class="border-t border-dark-600 pt-5 space-y-5">
+        <div><h3 class="text-base font-semibold text-emerald-400 mb-2">🟢 O que é</h3><p class="text-neutral-300 text-sm leading-relaxed">Skills são <em>instruções reutilizáveis</em> para tarefas recorrentes. Crie uma vez, use com <code class="bg-dark-700 px-1.5 py-0.5 rounded text-amber-400 text-xs font-mono">$nome-da-skill</code> ou deixe o Codex invocar automaticamente.</p></div>
+        <div><h3 class="text-base font-semibold text-emerald-400 mb-2">💡 Por que aprender</h3><p class="text-neutral-300 text-sm leading-relaxed">Eliminam repetição. Uma skill de "revisão de PR" pode rodar 3 subagentes em paralelo sem reescrever o prompt toda vez.</p></div>
+        <div><h3 class="text-base font-semibold text-emerald-400 mb-3">🔑 Estrutura mínima</h3>
+          <pre class="bg-dark-900 rounded-lg p-3 text-xs text-neutral-300 overflow-x-auto font-mono">---
+name: pr-review-agent
+description: Use quando pedir revisão de PR, diff ou código alterado.
+---
+Ao revisar um PR:
+1. Leia o diff completo
+2. Identifique riscos de segurança
+3. Verifique cobertura de testes
+4. Classifique achados por severidade</pre>
+        </div>
+        <div class="flex justify-start gap-3 pt-2">
+          <a href="../../basico.html#modulo-5" class="px-4 py-2 text-sm bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg transition">Ver Completo</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Módulo 1.6 -->
+  <div class="mb-6 rounded-2xl border border-dark-600 bg-dark-800 overflow-hidden" id="modulo-1-6">
+    <button onclick="toggleTopic(this)" aria-expanded="false" aria-controls="exp-1-6"
+            class="w-full flex justify-start items-center gap-4 p-5 hover:bg-dark-700 transition text-left">
+      <span class="text-emerald-400 text-xs font-bold w-6 flex-shrink-0">1.6</span>
+      <span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center justify-center text-sm font-bold flex-shrink-0">6</span>
+      <div class="flex-1 min-w-0">
+        <h2 class="text-xl font-bold">Threads e Tipos de Agente</h2>
+        <p class="text-sm text-neutral-400 mt-0.5">10 tipos · threads · workers · task agents · background</p>
+      </div>
+      <span class="text-xs text-neutral-500 hidden sm:block">~6 min</span>
+      <svg class="w-5 h-5 text-neutral-400 flex-shrink-0 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+    </button>
+    <div id="exp-1-6" class="topic-explanation px-5 pb-6">
+      <div class="border-t border-dark-600 pt-5 space-y-5">
+        <div><h3 class="text-base font-semibold text-emerald-400 mb-2">🟢 O que é</h3><p class="text-neutral-300 text-sm leading-relaxed">O Codex tem vários "nomes" para agentes — thread, task agent, worker, subagente, background agent, automação, skill. Todos são variações de como você estrutura o trabalho.</p></div>
+        <div><h3 class="text-base font-semibold text-emerald-400 mb-2">💡 Por que aprender</h3><p class="text-neutral-300 text-sm leading-relaxed">Entender a hierarquia evita confusão. <strong>Comece com threads + skills + automações.</strong> Subagentes e workers vêm quando precisa paralelismo real.</p></div>
+        <div><h3 class="text-base font-semibold text-emerald-400 mb-3">🔑 Tabela dos 10 tipos</h3>
+          <div class="overflow-x-auto rounded-xl border border-dark-600"><table class="w-full"><thead class="bg-dark-700"><tr><th class="text-left px-4 py-2 text-neutral-300 font-semibold text-xs">Tipo</th><th class="text-left px-4 py-2 text-neutral-300 font-semibold text-xs">Uso</th></tr></thead><tbody class="divide-y divide-dark-600 text-xs"><tr class="hover:bg-dark-700/50"><td class="px-4 py-2 text-amber-400 font-mono">Agente principal</td><td class="px-4 py-2 text-neutral-400">Chat/thread normal</td></tr><tr class="hover:bg-dark-700/50"><td class="px-4 py-2 text-sky-400 font-mono">Subagente</td><td class="px-4 py-2 text-neutral-400">"Use subagentes em paralelo"</td></tr><tr class="hover:bg-dark-700/50"><td class="px-4 py-2 text-sky-400 font-mono">Background agent</td><td class="px-4 py-2 text-neutral-400">Thread em segundo plano</td></tr><tr class="hover:bg-dark-700/50"><td class="px-4 py-2 text-purple-400 font-mono">Automação</td><td class="px-4 py-2 text-neutral-400">Aba Automations (agendado)</td></tr><tr class="hover:bg-dark-700/50"><td class="px-4 py-2 text-purple-400 font-mono">Skill</td><td class="px-4 py-2 text-neutral-400">$nome ou linguagem natural</td></tr></tbody></table></div>
+        </div>
+        <div class="flex justify-start gap-3 pt-2">
+          <a href="../../basico.html#modulo-6" class="px-4 py-2 text-sm bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg transition">Ver Completo</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Módulo 1.7 -->
+  <div class="mb-6 rounded-2xl border border-dark-600 bg-dark-800 overflow-hidden" id="modulo-1-7">
+    <button onclick="toggleTopic(this)" aria-expanded="false" aria-controls="exp-1-7"
+            class="w-full flex justify-start items-center gap-4 p-5 hover:bg-dark-700 transition text-left">
+      <span class="text-emerald-400 text-xs font-bold w-6 flex-shrink-0">1.7</span>
+      <span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center justify-center text-sm font-bold flex-shrink-0">7</span>
+      <div class="flex-1 min-w-0">
+        <h2 class="text-xl font-bold">Subagentes em Paralelo</h2>
+        <p class="text-sm text-neutral-400 mt-0.5">fórmula de prompt · combinar com skills · consolidar resultados</p>
+      </div>
+      <span class="text-xs text-neutral-500 hidden sm:block">~8 min</span>
+      <svg class="w-5 h-5 text-neutral-400 flex-shrink-0 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+    </button>
+    <div id="exp-1-7" class="topic-explanation px-5 pb-6">
+      <div class="border-t border-dark-600 pt-5 space-y-5">
+        <div><h3 class="text-base font-semibold text-emerald-400 mb-2">🟢 O que é</h3><p class="text-neutral-300 text-sm leading-relaxed">Subagentes especializados disparados <strong>em paralelo</strong>. O Codex <em>não os cria automaticamente</em> — você pede explicitamente com "use subagentes em paralelo".</p></div>
+        <div><h3 class="text-base font-semibold text-emerald-400 mb-2">💡 Por que aprender</h3><p class="text-neutral-300 text-sm leading-relaxed">Auditorias, planejamento de features e refactoring divididos em paralelo reduzem o tempo total drasticamente.</p></div>
+        <div><h3 class="text-base font-semibold text-emerald-400 mb-3">🔑 Fórmula de prompt</h3>
+          <div class="rounded-xl bg-emerald-500/5 border border-emerald-500/20 p-4">
+            <pre class="bg-dark-900 rounded-lg p-3 text-xs text-neutral-300 overflow-x-auto font-mono">Use subagentes em paralelo para [objetivo].
+Divida:
+1. Subagente A: [papel específico]
+2. Subagente B: [papel específico]
+3. Subagente C: [papel específico]
+Regras: trabalho independente, não edite ainda, consolide no final.</pre>
+          </div>
+        </div>
+        <div class="flex justify-start gap-3 pt-2">
+          <a href="../../basico.html#modulo-7" class="px-4 py-2 text-sm bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg transition">Ver Completo</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Módulo 1.8 -->
+  <div class="mb-6 rounded-2xl border border-dark-600 bg-dark-800 overflow-hidden" id="modulo-1-8">
+    <button onclick="toggleTopic(this)" aria-expanded="false" aria-controls="exp-1-8"
+            class="w-full flex justify-start items-center gap-4 p-5 hover:bg-dark-700 transition text-left">
+      <span class="text-emerald-400 text-xs font-bold w-6 flex-shrink-0">1.8</span>
+      <span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center justify-center text-sm font-bold flex-shrink-0">8</span>
+      <div class="flex-1 min-w-0">
+        <h2 class="text-xl font-bold">Worktrees e GitHub Actions</h2>
+        <p class="text-sm text-neutral-400 mt-0.5">paralelo sem conflito · PRs automáticos · CI/CD com Codex</p>
+      </div>
+      <span class="text-xs text-neutral-500 hidden sm:block">~6 min</span>
+      <svg class="w-5 h-5 text-neutral-400 flex-shrink-0 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+    </button>
+    <div id="exp-1-8" class="topic-explanation px-5 pb-6">
+      <div class="border-t border-dark-600 pt-5 space-y-5">
+        <div><h3 class="text-base font-semibold text-emerald-400 mb-2">🟢 O que é</h3><p class="text-neutral-300 text-sm leading-relaxed">Worktrees permitem múltiplos agentes trabalharem em paralelo <strong>sem misturar alterações</strong>. Cada agente tem seu diretório + branch. A OpenAI destaca worktrees como parte central do fluxo multiagente.</p></div>
+        <div><h3 class="text-base font-semibold text-emerald-400 mb-2">💡 Por que aprender</h3><p class="text-neutral-300 text-sm leading-relaxed">Sem worktrees, dois agentes no mesmo arquivo criam conflitos. Com worktrees, cada um trabalha isolado e você faz merge depois.</p></div>
+        <div><h3 class="text-base font-semibold text-emerald-400 mb-3">🔑 Capacidades Git/GitHub</h3>
+          <div class="grid sm:grid-cols-2 gap-3">
+            <div class="bg-dark-700/40 border border-dark-600 rounded-xl p-3"><div class="text-xs font-bold text-emerald-400 mb-1">🌿 Worktrees</div><p class="text-xs text-neutral-400">Agentes paralelos, branch próprio, sem conflito</p></div>
+            <div class="bg-dark-700/40 border border-dark-600 rounded-xl p-3"><div class="text-xs font-bold text-emerald-400 mb-1">📋 PRs automáticos</div><p class="text-xs text-neutral-400">Branch + commit + push + PR com resumo</p></div>
+            <div class="bg-dark-700/40 border border-dark-600 rounded-xl p-3"><div class="text-xs font-bold text-emerald-400 mb-1">⚡ GitHub Actions</div><p class="text-xs text-neutral-400">Codex como CI, patches automáticos</p></div>
+            <div class="bg-dark-700/40 border border-dark-600 rounded-xl p-3"><div class="text-xs font-bold text-emerald-400 mb-1">📱 Celular</div><p class="text-xs text-neutral-400">Delega via ChatGPT app, recebe PRs remotamente</p></div>
+          </div>
+        </div>
+        <div class="flex justify-start gap-3 pt-2">
+          <a href="../../basico.html#modulo-8" class="px-4 py-2 text-sm bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg transition">Ver Completo</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Módulo 1.9 -->
+  <div class="mb-6 rounded-2xl border border-dark-600 bg-dark-800 overflow-hidden" id="modulo-1-9">
+    <button onclick="toggleTopic(this)" aria-expanded="false" aria-controls="exp-1-9"
+            class="w-full flex justify-start items-center gap-4 p-5 hover:bg-dark-700 transition text-left">
+      <span class="text-emerald-400 text-xs font-bold w-6 flex-shrink-0">1.9</span>
+      <span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center justify-center text-sm font-bold flex-shrink-0">9</span>
+      <div class="flex-1 min-w-0">
+        <h2 class="text-xl font-bold">Automações e CI/CD</h2>
+        <p class="text-sm text-neutral-400 mt-0.5">agendamento · revisão semanal · rotinas automáticas</p>
+      </div>
+      <span class="text-xs text-neutral-500 hidden sm:block">~6 min</span>
+      <svg class="w-5 h-5 text-neutral-400 flex-shrink-0 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+    </button>
+    <div id="exp-1-9" class="topic-explanation px-5 pb-6">
+      <div class="border-t border-dark-600 pt-5 space-y-5">
+        <div><h3 class="text-base font-semibold text-emerald-400 mb-2">🟢 O que é</h3><p class="text-neutral-300 text-sm leading-relaxed">Automações configuram rotinas que o Codex executa em horário definido sem você estar presente. Disponível na aba <em>Automations</em> do Codex App (Windows).</p></div>
+        <div><h3 class="text-base font-semibold text-emerald-400 mb-2">💡 Por que aprender</h3><p class="text-neutral-300 text-sm leading-relaxed">Transforma o Codex em membro da equipe que trabalha enquanto você dorme — revisando código, rodando testes, gerando relatórios.</p></div>
+        <div><h3 class="text-base font-semibold text-emerald-400 mb-3">🔑 Exemplo: revisão semanal</h3>
+          <div class="rounded-xl bg-emerald-500/5 border border-emerald-500/20 p-4">
+            <pre class="bg-dark-900 rounded-lg p-3 text-xs text-neutral-300 overflow-x-auto font-mono">Toda segunda-feira às 9h:
+1. Atualizar dependências (se seguro)
+2. Rodar testes
+3. Rodar build
+4. Gerar reports/weekly-review.md
+5. Se houver mudanças, criar commit</pre>
+          </div>
+        </div>
+        <div class="flex justify-start gap-3 pt-2">
+          <a href="../../basico.html#modulo-9" class="px-4 py-2 text-sm bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg transition">Ver Completo</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Módulo 1.10 -->
+  <div class="mb-6 rounded-2xl border border-dark-600 bg-dark-800 overflow-hidden" id="modulo-1-10">
+    <button onclick="toggleTopic(this)" aria-expanded="false" aria-controls="exp-1-10"
+            class="w-full flex justify-start items-center gap-4 p-5 hover:bg-dark-700 transition text-left">
+      <span class="text-emerald-400 text-xs font-bold w-6 flex-shrink-0">1.10</span>
+      <span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center justify-center text-sm font-bold flex-shrink-0">10</span>
+      <div class="flex-1 min-w-0">
+        <h2 class="text-xl font-bold">Projeto Completo — App Real com Codex</h2>
+        <p class="text-sm text-neutral-400 mt-0.5">app de investimentos · multitasking · reverse prompting · deploy</p>
+      </div>
+      <span class="text-xs text-neutral-500 hidden sm:block">~8 min</span>
+      <svg class="w-5 h-5 text-neutral-400 flex-shrink-0 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+    </button>
+    <div id="exp-1-10" class="topic-explanation px-5 pb-6">
+      <div class="border-t border-dark-600 pt-5 space-y-5">
+        <div><h3 class="text-base font-semibold text-emerald-400 mb-2">🟢 O que é</h3><p class="text-neutral-300 text-sm leading-relaxed">Construção de um <strong>app de portfólio de ações</strong> completo — com UI, banco de dados, dados reais de mercado e material de marketing — usando Codex 5.5, sem experiência prévia em programação.</p></div>
+        <div><h3 class="text-base font-semibold text-emerald-400 mb-2">💡 Por que aprender</h3><p class="text-neutral-300 text-sm leading-relaxed">Mostra o Codex no limite: multitasking real com 3 agentes simultâneos (dev + vídeo + pesquisa), image generation e reverse prompting.</p></div>
+        <div><h3 class="text-base font-semibold text-emerald-400 mb-3">🔑 Fluxo do projeto</h3>
+          <div class="space-y-2">
+            <div class="flex gap-3"><span class="w-6 h-6 rounded-full bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center text-xs text-emerald-400 font-bold flex-shrink-0">1</span><p class="text-sm text-neutral-300">Design com image generation — Codex gera opções visuais, usuário escolhe</p></div>
+            <div class="flex gap-3"><span class="w-6 h-6 rounded-full bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center text-xs text-emerald-400 font-bold flex-shrink-0">2</span><p class="text-sm text-neutral-300">Frontend + banco — Next.js + Convex para persistir portfólio</p></div>
+            <div class="flex gap-3"><span class="w-6 h-6 rounded-full bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center text-xs text-emerald-400 font-bold flex-shrink-0">3</span><p class="text-sm text-neutral-300">Dados reais — Alpha Vantage API gratuita para preços ao vivo</p></div>
+            <div class="flex gap-3"><span class="w-6 h-6 rounded-full bg-sky-500/20 border border-sky-500/30 flex items-center justify-center text-xs text-sky-400 font-bold flex-shrink-0">4</span><p class="text-sm text-neutral-300">Multitasking — 3 agentes: dev + vídeo (Remotion) + pesquisa (browser)</p></div>
+            <div class="flex gap-3"><span class="w-6 h-6 rounded-full bg-sky-500/20 border border-sky-500/30 flex items-center justify-center text-xs text-sky-400 font-bold flex-shrink-0">5</span><p class="text-sm text-neutral-300">Reverse prompting — perguntar ao Codex "o que deve ser feito em seguida?"</p></div>
+          </div>
+        </div>
+        <div class="flex justify-start gap-3 pt-2">
+          <a href="../../basico.html#modulo-10" class="px-4 py-2 text-sm bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg transition">Ver Completo</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <div class="flex items-center justify-between mt-10 pt-8 border-t border-dark-700">
+    <a href="../../" class="text-sm text-neutral-400 hover:text-neutral-200 transition flex items-center gap-2">← Início</a>
+    <a href="../trilha2/" class="text-sm text-blue-400 hover:text-blue-300 transition flex items-center gap-2">Próxima: T2 Terminal →</a>
+  </div>
+
+</div>
+
+<footer class="border-t border-dark-700 py-10 px-4 mt-8">
+  <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+    <div class="flex items-center gap-3">
+      <span class="text-primary font-black text-lg">INEMA</span>
+      <span class="text-dark-600">|</span>
+      <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm">INEMA.CLUB</a>
+    </div>
+    <p class="text-sm text-neutral-500">Canal <a href="https://t.me/c/3053650449/2" target="_blank" class="text-amber-400 hover:text-amber-300">INEMA.Codex</a> · maio 2026</p>
+    <p class="text-xs text-neutral-600"><a href="https://github.com/inematds/codexbasico" target="_blank" class="hover:text-neutral-400">inematds/codexbasico</a></p>
+  </div>
+</footer>
+
+<script>
+  function toggleTopic(btn) {
+    const id = btn.getAttribute('aria-controls');
+    const panel = document.getElementById(id);
+    const svg = btn.querySelector('svg:last-child');
+    const isOpen = panel.classList.contains('open');
+    panel.classList.toggle('open', !isOpen);
+    btn.setAttribute('aria-expanded', String(!isOpen));
+    if (svg) svg.style.transform = isOpen ? '' : 'rotate(180deg)';
+  }
+  function toggleTheme() {
+    const html = document.documentElement;
+    const isDark = html.classList.toggle('dark');
+    document.getElementById('icon-sun').classList.toggle('hidden', isDark);
+    document.getElementById('icon-moon').classList.toggle('hidden', !isDark);
+    try { localStorage.setItem('inema.prefs', JSON.stringify({dark: isDark})); } catch(e){}
+  }
+  (function() {
+    const isDark = document.documentElement.classList.contains('dark');
+    document.getElementById('icon-sun').classList.toggle('hidden', isDark);
+    document.getElementById('icon-moon').classList.toggle('hidden', !isDark);
+  })();
+</script>
+</body>
+</html>
