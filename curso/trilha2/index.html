@@ -178,7 +178,7 @@ node -v && npm -v</pre>
       <span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 border border-blue-500/30 flex items-center justify-center text-sm font-bold flex-shrink-0">2</span>
       <div class="flex-1 min-w-0">
         <h2 class="text-xl font-bold">Instalação do Codex CLI</h2>
-        <p class="text-sm text-neutral-400 mt-0.5">npm install global · verificar versão · atualizar</p>
+        <p class="text-sm text-neutral-400 mt-0.5">npm install global · verificar versão · erros comuns (Windows · git)</p>
       </div>
       <span class="text-xs text-neutral-500 hidden sm:block">~8 min</span>
       <svg class="w-5 h-5 text-neutral-400 flex-shrink-0 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
@@ -207,6 +207,87 @@ npm config set prefix '~/.npm-global'
 echo 'export PATH=~/.npm-global/bin:$PATH' >> ~/.bashrc
 source ~/.bashrc</pre>
             </div>
+          </div>
+        </div>
+
+        <!-- Erros e soluções (Windows · git · aprovação) -->
+        <div><h3 class="text-base font-semibold text-blue-400 mb-3">⚠️ Erros comuns na primeira execução — e a solução</h3>
+          <div class="space-y-3">
+
+            <!-- Erro 1: PowerShell -->
+            <div class="bg-red-500/5 border border-red-500/20 rounded-xl p-4">
+              <div class="text-xs font-bold text-red-400 mb-2">✗ PowerShell: "a execução de scripts foi desabilitada"</div>
+              <pre class="bg-dark-900 rounded-lg p-3 text-xs text-red-300 overflow-x-auto font-mono">codex : O arquivo codex.ps1 não pode ser carregado porque a
+execução de scripts foi desabilitada neste sistema.
+    + FullyQualifiedErrorId : UnauthorizedAccess</pre>
+            </div>
+            <div class="bg-blue-500/5 border border-blue-500/20 rounded-xl p-4">
+              <div class="text-xs font-bold text-blue-400 mb-2">✓ Solução — liberar scripts só para o seu usuário (não precisa de admin)</div>
+              <pre class="bg-dark-900 rounded-lg p-3 text-xs text-blue-300 overflow-x-auto font-mono"># No PowerShell, rode uma vez e confirme com "S":
+Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
+
+# Teste de novo:
+codex --version</pre>
+              <p class="text-xs text-neutral-400 mt-2"><strong class="text-neutral-300">RemoteSigned</strong> roda seus scripts locais e só exige assinatura nos baixados da internet. <strong class="text-neutral-300">CurrentUser</strong> aplica só ao seu perfil — não mexe na máquina toda.</p>
+            </div>
+            <div class="bg-dark-700/40 border border-dark-600 rounded-xl p-4">
+              <div class="text-xs font-bold text-neutral-400 mb-2 uppercase tracking-wider">Alternativa sem mexer na política</div>
+              <pre class="bg-dark-900 rounded-lg p-3 text-xs text-blue-300 overflow-x-auto font-mono"># Rode o Codex pelo Prompt de Comando (cmd), que
+# não passa pela política de execução do PowerShell:
+codex --version
+
+# Conferir a política atual, se quiser:
+Get-ExecutionPolicy -List</pre>
+            </div>
+
+            <!-- Erro 2: git push -->
+            <div class="bg-red-500/5 border border-red-500/20 rounded-xl p-4">
+              <div class="text-xs font-bold text-red-400 mb-2">✗ git push "não atualiza" o repositório no GitHub</div>
+              <pre class="bg-dark-900 rounded-lg p-3 text-xs text-red-300 overflow-x-auto font-mono">git add skills/minha-skill
+git commit -m "Add skill"
+git push -u origin main   # ...e nada aparece no GitHub</pre>
+            </div>
+            <div class="bg-blue-500/5 border border-blue-500/20 rounded-xl p-4">
+              <div class="text-xs font-bold text-blue-400 mb-2">✓ Diagnóstico em 3 comandos — descubra o porquê</div>
+              <pre class="bg-dark-900 rounded-lg p-3 text-xs text-blue-300 overflow-x-auto font-mono">git status     # 1. os arquivos estão "staged" (verdes)?
+git remote -v  # 2. existe 'origin' e a URL está certa?
+git branch     # 3. seu branch é 'main' ou 'master'?</pre>
+            </div>
+            <div class="grid sm:grid-cols-2 gap-2 text-xs">
+              <div class="bg-dark-700/40 border border-dark-600 rounded-lg p-3"><span class="text-red-400 font-bold">✗ Pasta vazia</span><span class="text-neutral-400"> — git não versiona pasta sem arquivo. Precisa de ≥1 arquivo dentro.</span></div>
+              <div class="bg-dark-700/40 border border-dark-600 rounded-lg p-3"><span class="text-red-400 font-bold">✗ Branch errado</span><span class="text-neutral-400"> — local é 'master' e o push foi pra 'main' (ou vice-versa).</span></div>
+              <div class="bg-dark-700/40 border border-dark-600 rounded-lg p-3"><span class="text-red-400 font-bold">✗ Sem remote</span><span class="text-neutral-400"> — 'origin' não existe ou aponta pra URL errada.</span></div>
+              <div class="bg-dark-700/40 border border-dark-600 rounded-lg p-3"><span class="text-red-400 font-bold">✗ Faltou pull</span><span class="text-neutral-400"> — o remoto estava à frente; o push foi rejeitado.</span></div>
+            </div>
+            <div class="bg-dark-700/40 border border-dark-600 rounded-xl p-4">
+              <div class="text-xs font-bold text-neutral-400 mb-2 uppercase tracking-wider">Sequência que sobe de verdade</div>
+              <pre class="bg-dark-900 rounded-lg p-3 text-xs text-blue-300 overflow-x-auto font-mono"># Se ainda não houver remote:
+git remote add origin https://github.com/usuario/repo.git
+
+git add .
+git commit -m "Add automatic climate dashboard update skill"
+
+# Se o push for rejeitado (remoto à frente):
+git pull --rebase origin main
+git push -u origin main</pre>
+              <p class="text-xs text-neutral-400 mt-2">💡 O GitHub não aceita senha no push — use um <strong class="text-neutral-300">Personal Access Token</strong> ou <code class="bg-dark-700 px-1 py-0.5 rounded text-amber-400">gh auth login</code>.</p>
+            </div>
+
+            <!-- Erro 3: modos de aprovação e config -->
+            <div class="bg-blue-500/5 border border-blue-500/20 rounded-xl p-4">
+              <div class="text-xs font-bold text-blue-400 mb-2">🔐 Codex pedindo aprovação a cada passo? Modos de aprovação e config</div>
+              <p class="text-xs text-neutral-400 mb-2">Por padrão o Codex confirma antes de rodar comandos ou editar arquivos. Você escolhe o nível:</p>
+              <div class="grid sm:grid-cols-3 gap-2 text-xs mb-3">
+                <div class="bg-dark-900 rounded-lg p-2"><code class="text-blue-400 font-mono">on-request</code><span class="text-neutral-400 block mt-0.5">padrão — pede quando precisa</span></div>
+                <div class="bg-dark-900 rounded-lg p-2"><code class="text-blue-400 font-mono">--full-auto</code><span class="text-neutral-400 block mt-0.5">roda sozinho na sandbox</span></div>
+                <div class="bg-dark-900 rounded-lg p-2"><code class="text-blue-400 font-mono">--dangerously-bypass-<wbr>approvals-and-sandbox</code><span class="text-neutral-400 block mt-0.5">sem freios (só em Docker)</span></div>
+              </div>
+              <pre class="bg-dark-900 rounded-lg p-3 text-xs text-blue-300 overflow-x-auto font-mono"># ~/.codex/config.toml — fixa o padrão e evita repetir flags:
+approval_policy = "on-request"      # untrusted | on-failure | on-request | never
+sandbox_mode    = "workspace-write" # read-only | workspace-write | danger-full-access</pre>
+              <p class="text-xs text-neutral-400 mt-2">Config completa e uso em container no módulo <a href="#modulo-2-6" class="text-blue-400 hover:underline">2.6 — Docker e Configuração Avançada</a>.</p>
+            </div>
+
           </div>
         </div>
       </div>
